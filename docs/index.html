@@ -134,7 +134,7 @@
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>name</code></td><td>{{accreditation.name}}</td></tr>
+<tr><td><code>name</code></td><td>{{ accreditation.name }}</td></tr>
 <tr><td><code>number</code></td><td>{{ accreditation.number }}</td></tr>
 </table>
 </details>
@@ -222,9 +222,9 @@
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>scheduled_start</code></td><td>{{appt.scheduled_start}}</td></tr>
-<tr><td><code>task.name</code></td><td>{{appt.task.name}}</td></tr>
-<tr><td><code>task.property.name</code></td><td>{{appt.task.property.name}}</td></tr>
+<tr><td><code>scheduled_start</code></td><td>{{ appt.scheduled_start }}</td></tr>
+<tr><td><code>task.name</code></td><td>{{ appt.task.name }}</td></tr>
+<tr><td><code>task.property.name</code></td><td>{{ appt.task.property.name }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -751,7 +751,7 @@ Due: {{ inv.due_date|date:&quot;jS F Y&quot; }}&lt;br&gt;
 <tr><td><code>description</code></td><td>{{ invoice.description|markdowner }}</td></tr>
 <tr><td><code>due_date</code></td><td>{{ invoice.due_date|date:&quot;jS F Y&quot;|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ invoice.gst|currency }}</td></tr>
-<tr><td><code>number</code></td><td>{{ invoice.number|default:&quot;-&quot; }}</td></tr>
+<tr><td><code>number</code></td><td>{{ invoice.number|default:&quot;[[ invoice_number ]]&quot; }}</td></tr>
 <tr><td><code>ref</code></td><td>{{ invoice.ref|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ invoice.subtotal|currency }}</td></tr>
 <tr><td><code>total</code></td><td>{{ invoice.total|currency }}</td></tr>
@@ -1132,7 +1132,7 @@ ID: {{ lineitem.remark.id }}
 <tr><td><code>cost_summary.subtotal</code></td><td>{{ lineitem_group.cost_summary.subtotal|currency }}</td></tr>
 <tr><td><code>cost_summary.total</code></td><td>{{ lineitem_group.cost_summary.total|currency }}</td></tr>
 <tr><td><code>property.address</code></td><td>{{ lineitem_group.property.address }}</td></tr>
-<tr><td><code>property.client_ref</code></td><td>{{ lineitem_group.property.client_ref}}</td></tr>
+<tr><td><code>property.client_ref</code></td><td>{{ lineitem_group.property.client_ref }}</td></tr>
 <tr><td><code>property.name</code></td><td>{{ lineitem_group.property.name }}</td></tr>
 <tr><td><code>property.ref</code></td><td>{{ lineitem_group.property.ref }}</td></tr>
 <tr><td><code>task.address</code></td><td>{{ lineitem_group.task.address }}</td></tr>
@@ -1520,7 +1520,7 @@ ID: {{ lineitem.remark.id }}
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>property__name</code></td><td>{{ property.property__name }}</td></tr>
-<tr><td><code>property_id</code></td><td>{{property.property_id}}</td></tr>
+<tr><td><code>property_id</code></td><td>{{ property.property_id }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -1645,11 +1645,11 @@ ID: {{ lineitem.remark.id }}
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>get_uuid_approval_url</code></td><td>{{ quote.get_uuid_approval_url }}</td></tr>
-<tr><td><code>gst</code></td><td>{{quote.gst|currency}}</td></tr>
+<tr><td><code>gst</code></td><td>{{ quote.gst|currency }}</td></tr>
 <tr><td><code>property.name</code></td><td>{{ quote.property.name }}</td></tr>
 <tr><td><code>ref</code></td><td>{{ quote.ref }}</td></tr>
-<tr><td><code>subtotal</code></td><td>{{quote.subtotal|currency}}</td></tr>
-<tr><td><code>total</code></td><td>{{quote.total|currency}}</td></tr>
+<tr><td><code>subtotal</code></td><td>{{ quote.subtotal|currency }}</td></tr>
+<tr><td><code>total</code></td><td>{{ quote.total|currency }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -1835,8 +1835,8 @@ ID: {{ repair.remark.id }}
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>email</code></td><td>{{request_user.email}}</td></tr>
-<tr><td><code>name</code></td><td>{{request_user.name}}</td></tr>
+<tr><td><code>email</code></td><td>{{ request_user.email }}</td></tr>
+<tr><td><code>name</code></td><td>{{ request_user.name }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -1922,9 +1922,9 @@ ID: {{ repair.remark.id }}
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
                                     <div class="example-code">&lt;div&gt;
-{{ line.routineservicetype.name }} –
+&lt;div&gt;{{ line.routineservicetype.name }}&lt;/div&gt;
 {% for rslt in line.routineserviceleveltypes.all %}
-&lt;span&gt;{{ rslt.name }}{% if not forloop.last %}, {% endif %}&lt;/span&gt;
+&lt;span&gt;{{ rslt.name }}{% if not forloop.last %},{% endif %}&lt;/span&gt;
 {% endfor %}</div>
                                 </div>
                             </span>
@@ -2106,7 +2106,7 @@ ID: {{ repair.remark.id }}
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>period_start</code></td><td>{{ signoff.period_start}}</td></tr>
+<tr><td><code>period_start</code></td><td>{{ signoff.period_start }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -2257,7 +2257,7 @@ ID: {{ repair.remark.id }}
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>created</code></td><td>{{ signoffproperty.created|date }}</td></tr>
-<tr><td><code>disclaimed_reason</code></td><td>{{signoffproperty.disclaimed_reason}}</td></tr>
+<tr><td><code>disclaimed_reason</code></td><td>{{ signoffproperty.disclaimed_reason }}</td></tr>
 <tr><td><code>due</code></td><td>{{ signoffproperty.due|date }}</td></tr>
 <tr><td><code>is_disclaimed</code></td><td>{{ signoffproperty.is_disclaimed|yesno:&quot;red,black&quot; }}</td></tr>
 <tr><td><code>property</code></td><td>{{ signoffproperty.property }}</td></tr>
@@ -2332,11 +2332,11 @@ Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffpr
                                     When working with a collection (tasks), this variable (task) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;p&gt;Dear {{ contractor }},&lt;/p&gt;
+                                    <div class="example-code">&lt;p&gt;Dear {{ contractor_contact.name }},&lt;/p&gt;
 &lt;p&gt;You have been assigned the following tasks:&lt;/p&gt;
 {% for task in tasks %}
-&lt;p&gt;
-Task {{ task.ref }}&lt;br&gt;</div>
+&lt;p&gt;Task {{ task.ref }}&lt;/p&gt;
+&lt;p&gt;{{ task.description }}&lt;/p&gt;</div>
                                 </div>
                             </span>
                         </div>
