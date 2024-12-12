@@ -146,9 +146,9 @@
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>name</code></td><td>{{ accreditation.name }}</td></tr>
 <tr><td><code>number</code></td><td>{{ accreditation.number }}</td></tr>
 </table>
@@ -267,9 +267,9 @@
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>scheduled_start</code></td><td>{{ appt.scheduled_start }}</td></tr>
 <tr><td><code>task.name</code></td><td>{{ appt.task.name }}</td></tr>
 <tr><td><code>task.property.name</code></td><td>{{ appt.task.property.name }}</td></tr>
@@ -410,9 +410,9 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>name</code></td><td>{{ client.name|default:&#x27;valued customer&#x27; }}</td></tr>
 </table>
 </details>
@@ -454,9 +454,9 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>COMPANY_LICENSES</code></td><td>{{ config.COMPANY_LICENSES|markdowner }}</td></tr>
 <tr><td><code>INVOICE_PAYMENT_INSTRUCTIONS</code></td><td>{{ config.INVOICE_PAYMENT_INSTRUCTIONS|markdowner|default:&quot;Please pay invoice by the due date&quot; }}</td></tr>
 <tr><td><code>SERVICEQUOTE_TEMPLATE_TERMS_AND_CONDITIONS</code></td><td>{{ config.SERVICEQUOTE_TEMPLATE_TERMS_AND_CONDITIONS|markdowner }}</td></tr>
@@ -708,9 +708,9 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>logbook.name</code></td><td>{{ entry.logbook.name|default:&#x27;-&#x27; }}</td></tr>
 <tr><td><code>url</code></td><td>{{ entry.url }}</td></tr>
 </table>
@@ -775,9 +775,9 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>preview_url</code></td><td>{{ file.preview_url }}</td></tr>
 </table>
 </details>
@@ -931,9 +931,9 @@ Reference: {{ inv.ref }}&lt;br&gt;</div>
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>due_date</code></td><td>{{ inv.due_date|date:&quot;jS F Y&quot; }}</td></tr>
 <tr><td><code>number</code></td><td>{{ inv.number }}</td></tr>
 <tr><td><code>ref</code></td><td>{{ inv.ref }}</td></tr>
@@ -978,9 +978,9 @@ Due: {{ inv.due_date|date:&quot;jS F Y&quot; }}&lt;br&gt;
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>billingcard.postal_address</code></td><td>{{ invoice.billingcard.postal_address|linebreaksbr }}</td></tr>
 <tr><td><code>date</code></td><td>{{ invoice.date|date:&quot;jS F Y&quot;|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>description</code></td><td>{{ invoice.description|markdowner }}</td></tr>
@@ -1073,9 +1073,9 @@ Reference: {{ inv.ref }}&lt;br&gt;
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>label</code></td><td>{{ item.label }}</td></tr>
 </table>
 </details>
@@ -1285,9 +1285,9 @@ Reference: {{ inv.ref }}&lt;br&gt;
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>annual_subtotal</code></td><td>{{ line.annual_subtotal|currency }}</td></tr>
 <tr><td><code>description</code></td><td>{{ line.description|markdowner }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ line.gst|currency }}</td></tr>
@@ -1376,11 +1376,11 @@ Reference: {{ inv.ref }}&lt;br&gt;
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>asset.get_label</code></td><td>{{ lineitem.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
-<tr><td><code>description</code></td><td>{{ lineitem.description|markdowner }}</td></tr>
+<tr><td><code>description</code></td><td>{{ lineitem.description|markdowner|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ lineitem.gst|currency }}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:2 }}</td></tr>
 <tr><td><code>remark.get_description</code></td><td>{{ lineitem.remark.get_description|markdowner }}</td></tr>
@@ -1438,9 +1438,9 @@ ID: {{ lineitem.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>cost_summary.gst</code></td><td>{{ lineitem_group.cost_summary.gst|currency }}</td></tr>
 <tr><td><code>cost_summary.subtotal</code></td><td>{{ lineitem_group.cost_summary.subtotal|currency }}</td></tr>
 <tr><td><code>cost_summary.total</code></td><td>{{ lineitem_group.cost_summary.total|currency }}</td></tr>
@@ -1546,9 +1546,9 @@ ID: {{ lineitem.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>name</code></td><td>{{ logbook.name }}</td></tr>
 </table>
 </details>
@@ -1659,9 +1659,9 @@ ID: {{ lineitem.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>number</code></td><td>{{ note.number }}</td></tr>
 <tr><td><code>total</code></td><td>{{ note.total|currency }}</td></tr>
 </table>
@@ -1963,9 +1963,9 @@ ID: {{ lineitem.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>property__name</code></td><td>{{ property.property__name }}</td></tr>
 <tr><td><code>property_id</code></td><td>{{ property.property_id }}</td></tr>
 </table>
@@ -2031,15 +2031,15 @@ ID: {{ lineitem.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>created</code></td><td>{{ purchaseorder.created|date:&quot;jS F Y&quot; }}</td></tr>
 <tr><td><code>delivery_instructions</code></td><td>{{ purchaseorder.delivery_instructions|markdowner }}</td></tr>
 <tr><td><code>description</code></td><td>{{ purchaseorder.description|markdowner }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ purchaseorder.gst|currency }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ purchaseorder.subtotal|currency }}</td></tr>
-<tr><td><code>total</code></td><td>{{ purchaseorder.total|currency }}</td></tr>
+<tr><td><code>total</code></td><td>{{ purchaseorder.total|floatformat:2 }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -2119,9 +2119,9 @@ ID: {{ lineitem.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>get_uuid_approval_url</code></td><td>{{ quote.get_uuid_approval_url }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ quote.gst|currency }}</td></tr>
 <tr><td><code>property.name</code></td><td>{{ quote.property.name }}</td></tr>
@@ -2193,9 +2193,9 @@ ID: {{ lineitem.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>rejection_reason</code></td><td>{{ rectification.rejection_reason|markdowner }}</td></tr>
 </table>
 </details>
@@ -2234,9 +2234,9 @@ ID: {{ lineitem.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>asset.get_label</code></td><td>{{ repair.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
 <tr><td><code>notes</code></td><td>{{ repair.notes|default:repair.product.description|default:repair.product.name }}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ repair.quantity|floatformat:2 }}</td></tr>
@@ -2299,9 +2299,9 @@ ID: {{ repair.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>compliant</code></td><td>{{ report.compliant|yesno:&quot;compliant,non-compliant,not applicable&quot;}}</td></tr>
 <tr><td><code>get_title</code></td><td>{{ report.get_title }}</td></tr>
 </table>
@@ -2371,9 +2371,9 @@ ID: {{ repair.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>email</code></td><td>{{ request_user.email }}</td></tr>
 <tr><td><code>name</code></td><td>{{ request_user.name }}</td></tr>
 </table>
@@ -2438,9 +2438,9 @@ ID: {{ repair.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>asset</code></td><td>{{ row.asset }}</td></tr>
 <tr><td><code>count</code></td><td>{{ row.count }}</td></tr>
 <tr><td><code>service</code></td><td>{{ row.service }}</td></tr>
@@ -2476,9 +2476,9 @@ ID: {{ repair.remark.id }}
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
                                     <div class="example-code">&lt;div&gt;
-{{ line.routineservicetype.name }} –
+&lt;div&gt;{{ line.routineservicetype.name }}&lt;/div&gt;
 {% for rslt in line.routineserviceleveltypes.all %}
-&lt;span&gt;{{ rslt.name }}{% if not forloop.last %}, {% endif %}&lt;/span&gt;
+&lt;span&gt;{{ rslt.name }}{% if not forloop.last %},{% endif %}&lt;/span&gt;
 {% endfor %}</div>
                                 </div>
                             </span>
@@ -2501,9 +2501,9 @@ ID: {{ repair.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>name</code></td><td>{{ rslt.name }}</td></tr>
 </table>
 </details>
@@ -2565,9 +2565,9 @@ ID: {{ repair.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>annual_gst</code></td><td>{{ servicequote.annual_gst|currency }}</td></tr>
 <tr><td><code>annual_subtotal</code></td><td>{{ servicequote.annual_subtotal|currency }}</td></tr>
 <tr><td><code>annual_tax</code></td><td>{{ servicequote.annual_tax|currency }}</td></tr>
@@ -2661,9 +2661,9 @@ ID: {{ repair.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>filename</code></td><td>{{ signature.filename }}</td></tr>
 </table>
 </details>
@@ -2729,9 +2729,9 @@ ID: {{ repair.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>period_start</code></td><td>{{ signoff.period_start }}</td></tr>
 </table>
 </details>
@@ -2788,9 +2788,9 @@ ID: {{ repair.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>label</code></td><td>{{ signoffitem.label }}</td></tr>
 <tr><td><code>new_is_compliant</code></td><td>{{ signoffitem.new_is_compliant|yesno:&quot;green,red&quot; }}</td></tr>
 <tr><td><code>new_serviced_date</code></td><td>{{ signoffitem.new_serviced_date }}</td></tr>
@@ -2910,9 +2910,9 @@ ID: {{ repair.remark.id }}
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>created</code></td><td>{{ signoffproperty.created|date }}</td></tr>
 <tr><td><code>disclaimed_reason</code></td><td>{{ signoffproperty.disclaimed_reason }}</td></tr>
 <tr><td><code>due</code></td><td>{{ signoffproperty.due|date }}</td></tr>
@@ -2968,9 +2968,9 @@ Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffpr
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>0</code></td><td>{{ summary_remarks.0|default:&quot;0&quot; }}</td></tr>
 <tr><td><code>1</code></td><td>{{ summary_remarks.1|default:&quot;0&quot; }}</td></tr>
 <tr><td><code>10</code></td><td>{{ summary_remarks.10|default:&quot;0&quot; }}</td></tr>
@@ -3007,11 +3007,11 @@ Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffpr
                                     When working with a collection (tasks), this variable (task) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;p&gt;Dear {{ contractor }},&lt;/p&gt;
+                                    <div class="example-code">&lt;p&gt;Dear {{ contractor_contact.name }},&lt;/p&gt;
 &lt;p&gt;You have been assigned the following tasks:&lt;/p&gt;
 {% for task in tasks %}
-&lt;p&gt;
-Task {{ task.ref }}&lt;br&gt;</div>
+&lt;p&gt;Task {{ task.ref }}&lt;/p&gt;
+&lt;p&gt;{{ task.description }}&lt;/p&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -3033,9 +3033,9 @@ Task {{ task.ref }}&lt;br&gt;</div>
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>address</code></td><td>{{ task.address }}</td></tr>
 <tr><td><code>description</code></td><td>{{ task.description }}</td></tr>
 <tr><td><code>property.name</code></td><td>{{ task.property.name }}</td></tr>
@@ -3085,9 +3085,9 @@ Task {{ task.ref }}&lt;br&gt;</div>
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>get_uuid_approval_url</code></td><td>{{ task_origin_defectquote.get_uuid_approval_url|absolute }}</td></tr>
 </table>
 </details>
@@ -3206,9 +3206,9 @@ Task {{ task.ref }}&lt;br&gt;</div>
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>finished</code></td><td>{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:i&#x27;|default:&quot;(still in progress)&quot; }}</td></tr>
 <tr><td><code>get_duration</code></td><td>{{ tasksession.get_duration|duration }}</td></tr>
 <tr><td><code>get_type_display</code></td><td>{{ tasksession.get_type_display }}</td></tr>
@@ -3276,9 +3276,9 @@ Task {{ task.ref }}&lt;br&gt;</div>
 </details>
 </details>
 <details class="expandable-section">
-<summary>Properties</summary>
+<summary>Attributes</summary>
 <table>
-<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>inspected_date</code></td><td>{{ technician.inspected_date }}</td></tr>
 <tr><td><code>name</code></td><td>{{ technician.name }}</td></tr>
 </table>
