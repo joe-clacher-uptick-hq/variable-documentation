@@ -4,6 +4,32 @@
         <meta charset="UTF-8">
         <title>Django Template Variables Documentation</title>
         <style>
+    .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #0366d6;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 20px;
+        cursor: pointer;
+        transition: opacity 0.3s;
+        opacity: 0;
+        z-index: 1000;
+        border: none;
+    }
+    .back-to-top.visible {
+        opacity: 1;
+    }
+    .back-to-top:hover {
+        background-color: #024ea7;
+    }
             body { 
                 max-width: 1200px; 
                 margin: 0 auto; 
@@ -125,8 +151,28 @@
                 text-decoration: underline;
             }
         </style>
+        <script>
+            // Show/hide back to top button based on scroll position
+            window.onscroll = function() {
+                const button = document.querySelector('.back-to-top');
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    button.classList.add('visible');
+                } else {
+                    button.classList.remove('visible');
+                }
+            };
+            
+            // Smooth scroll to top function
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        </script>
     </head>
     <body>
+    <button onclick="scrollToTop()" class="back-to-top">↑</button>
     <h1>Django Template Variables Documentation</h1>
     
     <div class="toc">
@@ -1084,7 +1130,7 @@ Due: {{ inv.due_date|date:&quot;jS F Y&quot; }}&lt;br&gt;
 <tr><td><code>description</code></td><td>{{ invoice.description|markdowner }}</td></tr>
 <tr><td><code>due_date</code></td><td>{{ invoice.due_date|date:&quot;jS F Y&quot;|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ invoice.gst|currency }}</td></tr>
-<tr><td><code>number</code></td><td>{{ invoice.number|default:&quot;[[ invoice_number ]]&quot; }}</td></tr>
+<tr><td><code>number</code></td><td>{{ invoice.number|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>ref</code></td><td>{{ invoice.ref|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ invoice.subtotal|currency }}</td></tr>
 <tr><td><code>total</code></td><td>{{ invoice.total|currency }}</td></tr>
@@ -1391,7 +1437,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <tr><td><code>gst</code></td><td>{{ line.gst|currency }}</td></tr>
 <tr><td><code>product.name</code></td><td>{{ line.product.name }}</td></tr>
 <tr><td><code>product.sku</code></td><td>{{ line.product.sku }}</td></tr>
-<tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:-2 }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:2 }}</td></tr>
 <tr><td><code>routineservicetype.name</code></td><td>{{ line.routineservicetype.name }}</td></tr>
 <tr><td><code>site_price</code></td><td>{{ line.site_price|currency }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ line.subtotal|currency }}</td></tr>
@@ -1478,7 +1524,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <table>
 <tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>asset.get_label</code></td><td>{{ lineitem.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
-<tr><td><code>description</code></td><td>{{ lineitem.description|markdowner|default:&quot;-&quot; }}</td></tr>
+<tr><td><code>description</code></td><td>{{ lineitem.description|markdowner }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ lineitem.gst|currency }}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:2 }}</td></tr>
 <tr><td><code>remark.get_description</code></td><td>{{ lineitem.remark.get_description|markdowner }}</td></tr>
@@ -2137,7 +2183,7 @@ ID: {{ lineitem.remark.id }}
 <tr><td><code>description</code></td><td>{{ purchaseorder.description|markdowner }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ purchaseorder.gst|currency }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ purchaseorder.subtotal|currency }}</td></tr>
-<tr><td><code>total</code></td><td>{{ purchaseorder.total|floatformat:2 }}</td></tr>
+<tr><td><code>total</code></td><td>{{ purchaseorder.total|currency }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -2890,7 +2936,7 @@ ID: {{ repair.remark.id }}
 <table>
 <tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>label</code></td><td>{{ signoffitem.label }}</td></tr>
-<tr><td><code>new_is_compliant</code></td><td>{{ signoffitem.new_is_compliant|yesno:&quot;compliant,non-compliant&quot; }}</td></tr>
+<tr><td><code>new_is_compliant</code></td><td>{{ signoffitem.new_is_compliant|yesno:&quot;green,red&quot; }}</td></tr>
 <tr><td><code>new_serviced_date</code></td><td>{{ signoffitem.new_serviced_date }}</td></tr>
 <tr><td><code>new_signoff_note</code></td><td>{{ signoffitem.new_signoff_note }}</td></tr>
 </table>
