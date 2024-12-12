@@ -108,7 +108,7 @@
     <h2>accreditation</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>technician</code>
+                            AAAAAAAAAAA <code>technician</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -197,7 +197,7 @@
 <h2>appt</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>appointments</code>
+                            AAAAAAAAAAA <code>appointments</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -494,7 +494,7 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 <h2>entry</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>paper_logbooks</code>
+                            AAAAAAAAAAA <code>paper_logbooks</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -511,7 +511,7 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>digital_logbooks</code>
+                            AAAAAAAAAAA <code>digital_logbooks</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -563,7 +563,7 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 <h2>file</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>entry</code>
+                            AAAAAAAAAAA <code>entry</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -624,7 +624,7 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 <h2>formresponse</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>formresponses</code>
+                            AAAAAAAAAAA <code>formresponses</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -641,7 +641,7 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>joyfillformresponses</code>
+                            AAAAAAAAAAA <code>joyfillformresponses</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -684,7 +684,7 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 <h2>inv</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>invoices</code>
+                            AAAAAAAAAAA <code>invoices</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -798,7 +798,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <h2>item</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>items</code>
+                            AAAAAAAAAAA <code>items</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -895,7 +895,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <h2>line</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>lineitems</code>
+                            AAAAAAAAAAA <code>lineitems</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -912,7 +912,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>productlineitems</code>
+                            AAAAAAAAAAA <code>productlineitems</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -929,7 +929,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>servicelineitems</code>
+                            AAAAAAAAAAA <code>servicelineitems</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -946,7 +946,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>doandchargelineitems</code>
+                            AAAAAAAAAAA <code>doandchargelineitems</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -963,7 +963,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>fixedlineitems</code>
+                            AAAAAAAAAAA <code>fixedlineitems</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -991,11 +991,11 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>annual_subtotal</code></td><td>{{ line.annual_subtotal|currency }}</td></tr>
-<tr><td><code>description</code></td><td>{{ line.description|default:&#x27;-&#x27; }}</td></tr>
+<tr><td><code>description</code></td><td>{{ line.description|markdowner }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ line.gst|currency }}</td></tr>
 <tr><td><code>product.name</code></td><td>{{ line.product.name }}</td></tr>
 <tr><td><code>product.sku</code></td><td>{{ line.product.sku }}</td></tr>
-<tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:2 }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:-2 }}</td></tr>
 <tr><td><code>routineservicetype.name</code></td><td>{{ line.routineservicetype.name }}</td></tr>
 <tr><td><code>site_price</code></td><td>{{ line.site_price|currency }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ line.subtotal|currency }}</td></tr>
@@ -1024,7 +1024,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <h2>lineitem</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>lineitem_group</code>
+                            AAAAAAAAAAA <code>lineitem_group</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1041,7 +1041,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>lineitems</code>
+                            AAAAAAAAAAA <code>lineitems</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1070,7 +1070,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>asset.get_label</code></td><td>{{ lineitem.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
-<tr><td><code>description</code></td><td>{{ lineitem.description|markdowner }}</td></tr>
+<tr><td><code>description</code></td><td>{{ lineitem.description|markdowner|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ lineitem.gst|currency }}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:2 }}</td></tr>
 <tr><td><code>remark.get_description</code></td><td>{{ lineitem.remark.get_description|markdowner }}</td></tr>
@@ -1103,7 +1103,7 @@ ID: {{ lineitem.remark.id }}
 <h2>lineitem_group</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>consolidated_tasks</code>
+                            AAAAAAAAAAA <code>consolidated_tasks</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1192,7 +1192,7 @@ ID: {{ lineitem.remark.id }}
 <h2>logbook</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>digital_logbooks</code>
+                            AAAAAAAAAAA <code>digital_logbooks</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1272,7 +1272,7 @@ ID: {{ lineitem.remark.id }}
 <h2>note</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>creditnotes</code>
+                            AAAAAAAAAAA <code>creditnotes</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1359,7 +1359,7 @@ ID: {{ lineitem.remark.id }}
 <h2>photo</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>before_photos</code>
+                            AAAAAAAAAAA <code>before_photos</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1376,7 +1376,7 @@ ID: {{ lineitem.remark.id }}
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>after_photos</code>
+                            AAAAAAAAAAA <code>after_photos</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1393,7 +1393,7 @@ ID: {{ lineitem.remark.id }}
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>task_photos</code>
+                            AAAAAAAAAAA <code>task_photos</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1410,7 +1410,7 @@ ID: {{ lineitem.remark.id }}
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>photos</code>
+                            AAAAAAAAAAA <code>photos</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1494,7 +1494,7 @@ ID: {{ lineitem.remark.id }}
 <h2>property</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>properties</code>
+                            AAAAAAAAAAA <code>properties</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1574,7 +1574,7 @@ ID: {{ lineitem.remark.id }}
 <tr><td><code>description</code></td><td>{{ purchaseorder.description|markdowner }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ purchaseorder.gst|currency }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ purchaseorder.subtotal|currency }}</td></tr>
-<tr><td><code>total</code></td><td>{{ purchaseorder.total|floatformat:2 }}</td></tr>
+<tr><td><code>total</code></td><td>{{ purchaseorder.total|currency }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -1599,7 +1599,7 @@ ID: {{ lineitem.remark.id }}
 <h2>quote</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>quotes</code>
+                            AAAAAAAAAAA <code>quotes</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1616,7 +1616,7 @@ ID: {{ lineitem.remark.id }}
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>defectquotes</code>
+                            AAAAAAAAAAA <code>defectquotes</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1757,7 +1757,7 @@ ID: {{ repair.remark.id }}
 <h2>report</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>reports</code>
+                            AAAAAAAAAAA <code>reports</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1861,7 +1861,7 @@ ID: {{ repair.remark.id }}
 <h2>row</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>maintenance_summary</code>
+                            AAAAAAAAAAA <code>maintenance_summary</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -1914,7 +1914,7 @@ ID: {{ repair.remark.id }}
 <h2>rslt</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>line</code>
+                            AAAAAAAAAAA <code>line</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -2036,7 +2036,7 @@ ID: {{ repair.remark.id }}
 <h2>signature</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>signatures</code>
+                            AAAAAAAAAAA <code>signatures</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -2131,7 +2131,7 @@ ID: {{ repair.remark.id }}
 <h2>signoffitem</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>signoffproperty</code>
+                            AAAAAAAAAAA <code>signoffproperty</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -2211,7 +2211,7 @@ ID: {{ repair.remark.id }}
 <h2>signoffproperty</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>signoffproperties</code>
+                            AAAAAAAAAAA <code>signoffproperties</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -2228,7 +2228,7 @@ ID: {{ repair.remark.id }}
                         </div>
                         
                         <div class="loop-context" 
-                            Loop variable for <code>signoff</code>
+                            AAAAAAAAAAA <code>signoff</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -2325,18 +2325,18 @@ Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffpr
 <h2>task</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>tasks</code>
+                            AAAAAAAAAAA <code>tasks</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
                                     When working with a collection (tasks), this variable (task) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;p&gt;Dear {{ contractor }},&lt;/p&gt;
+                                    <div class="example-code">&lt;p&gt;Dear {{ contractor_contact.name }},&lt;/p&gt;
 &lt;p&gt;You have been assigned the following tasks:&lt;/p&gt;
 {% for task in tasks %}
-&lt;p&gt;
-Task {{ task.ref }}&lt;br&gt;</div>
+&lt;p&gt;Task {{ task.ref }}&lt;/p&gt;
+&lt;p&gt;{{ task.description }}&lt;/p&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -2443,7 +2443,7 @@ Task {{ task.ref }}&lt;br&gt;</div>
 <h2>tasksession</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>labour_sessions</code>
+                            AAAAAAAAAAA <code>labour_sessions</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
@@ -2498,7 +2498,7 @@ Task {{ task.ref }}&lt;br&gt;</div>
 <h2>technician</h2>
 
                         <div class="loop-context" 
-                            Loop variable for <code>maintenance_technicians</code>
+                            AAAAAAAAAAA <code>maintenance_technicians</code>
                             <span class="help-icon">?
                                 <div class="tooltip">
                                     <strong>What this means:</strong><br>
