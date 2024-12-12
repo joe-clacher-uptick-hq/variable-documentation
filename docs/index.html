@@ -50,34 +50,7 @@
     </head>
     <body>
     <h1>Django Template Variables Documentation</h1>
-    <h2>accreditation</h2>
-<details class="expandable-section">
-<summary>Found in files</summary>
-<ul>
-<li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Service Report (Prompts)</a></li>
-<li>[ABACUSFAS] - [emails] - <a href="https://ABACUSFAS.onuptick.com/configuration/emails">test</a></li>
-</ul>
-</details>
-<details class="expandable-section">
-<summary>Properties</summary>
-<table>
-<tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>name</code></td><td>{{accreditation.name}}</td></tr>
-<tr><td><code>number</code></td><td>{{ accreditation.number }}</td></tr>
-</table>
-</details>
-<details class="expandable-section">
-<summary>Usage Examples</summary>
-<pre><code class="language-django">
-&lt;td&gt;
-{% for accreditation in technician.accreditations %}
-&lt;div&gt;{{accreditation.name}}: {{ accreditation.number }}&lt;/div&gt;
-{% endfor %}
-&lt;/td&gt;
-</code></pre>
-</details>
-<hr>
-<h2>after_photos</h2>
+    <h2>after_photos</h2>
 <details class="expandable-section">
 <summary>Found in files</summary>
 <ul>
@@ -108,6 +81,8 @@
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>scheduled_start</code></td><td>{{appt.scheduled_start}}</td></tr>
+<tr><td><code>task.name</code></td><td>{{appt.task.name}}</td></tr>
+<tr><td><code>task.property.name</code></td><td>{{appt.task.property.name}}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -119,42 +94,13 @@
 {% timezone appt.timezone %}
 &lt;tr&gt;
 </code></pre>
-</details>
 <hr>
-<h2>appt</h2>
-<details class="expandable-section">
-<summary>Found in files</summary>
-<ul>
-<li>[AARHUSFIRE] - [emails] - <a href="https://AARHUSFIRE.onuptick.com/configuration/emails">Appointment Scheduled Email</a></li>
-</ul>
-</details>
-<details class="expandable-section">
-<summary>Properties</summary>
-<table>
-<tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>scheduled_start</code></td><td>{{appt.scheduled_start}}</td></tr>
-<tr><td><code>task</code></td><td>{{appt.task.property.name}}</td></tr>
-<tr><td><code>task.name</code></td><td>{{appt.task.name}}</td></tr>
-<tr><td><code>task.property</code></td><td>{{appt.task.property.name}}</td></tr>
-<tr><td><code>task.property.name</code></td><td>{{appt.task.property.name}}</td></tr>
-</table>
-</details>
-<details class="expandable-section">
-<summary>Usage Examples</summary>
 <pre><code class="language-django">
 {% timezone appt.timezone %}
 &lt;tr&gt;
 &lt;th style=&quot;...&quot; scope=&quot;...&quot; colspan=&quot;...&quot;&gt;{{appt.scheduled_start}}&lt;/th&gt;
 &lt;td style=&quot;...&quot;&gt;{{appt.task.name}}&lt;/td&gt;
 &lt;td style=&quot;...&quot;&gt;{{appt.task.property.name}}&lt;/td&gt;
-</code></pre>
-<hr>
-<pre><code class="language-django">
-&lt;tr&gt;
-&lt;th style=&quot;...&quot; scope=&quot;...&quot; colspan=&quot;...&quot;&gt;{{appt.scheduled_start}}&lt;/th&gt;
-&lt;td style=&quot;...&quot;&gt;{{appt.task.name}}&lt;/td&gt;
-&lt;td style=&quot;...&quot;&gt;{{appt.task.property.name}}&lt;/td&gt;
-&lt;/tr&gt;
 </code></pre>
 </details>
 <hr>
@@ -263,7 +209,6 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 <tr><td><code>COMPANY_LICENSES</code></td><td>{{ config.COMPANY_LICENSES|markdowner }}</td></tr>
 <tr><td><code>INVOICE_PAYMENT_INSTRUCTIONS</code></td><td>{{ config.INVOICE_PAYMENT_INSTRUCTIONS|markdowner|default:&quot;Please pay invoice by the due date&quot; }}</td></tr>
 <tr><td><code>SERVICEQUOTE_TEMPLATE_TERMS_AND_CONDITIONS</code></td><td>{{ config.SERVICEQUOTE_TEMPLATE_TERMS_AND_CONDITIONS|markdowner }}</td></tr>
-<tr><td><code>SITE_ABN</code></td><td>{{ config.SITE_ABN }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -293,6 +238,22 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 </ul>
 </details>
 <details class="expandable-section">
+<summary>Properties</summary>
+<table>
+<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><td><code>property.address</code></td><td>{{ lineitem_group.property.address }}</td></tr>
+<tr><td><code>property.client_ref</code></td><td>{{ lineitem_group.property.client_ref}}</td></tr>
+<tr><td><code>property.name</code></td><td>{{ lineitem_group.property.name }}</td></tr>
+<tr><td><code>property.ref</code></td><td>{{ lineitem_group.property.ref }}</td></tr>
+<tr><td><code>task.address</code></td><td>{{ lineitem_group.task.address }}</td></tr>
+<tr><td><code>task.authorisation_ref</code></td><td>{{ lineitem_group.task.authorisation_ref }}</td></tr>
+<tr><td><code>task.description</code></td><td>{{ lineitem_group.task.description|markdowner }}</td></tr>
+<tr><td><code>task.invoice_note</code></td><td>{{ lineitem_group.task.invoice_note|markdowner }}</td></tr>
+<tr><td><code>task.ref</code></td><td>{{ lineitem_group.task.ref }}</td></tr>
+<tr><td><code>task.scope_of_works</code></td><td>{{ lineitem_group.task.scope_of_works|markdowner }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
 &lt;section class=&quot;...&quot;&gt;
@@ -300,6 +261,14 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 {% for lineitem_group in consolidated_tasks %}
 {% if lineitem_group.task %}
 &lt;dl&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;div class=&quot;...&quot;&gt;
+&lt;dt class=&quot;...&quot;&gt;Property: &lt;/dt&gt;
+{% if lineitem_group.property %}
+&lt;dd class=&quot;...&quot;&gt;{{ lineitem_group.property.ref }} {{ lineitem_group.property.name }} {% if lineitem_group.property.client_ref %}({{ lineitem_group.property.client_ref}}){% endif %}&lt;/dd&gt;
+&lt;/div&gt;
 </code></pre>
 </details>
 <hr>
@@ -327,6 +296,14 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 &lt;tr&gt;
 &lt;th class=&quot;...&quot;&gt;Credit {{ note.number }} - {{ note }}&lt;/th&gt;
 </code></pre>
+<hr>
+<pre><code class="language-django">
+{% for note in creditnotes %}
+&lt;tr&gt;
+&lt;th class=&quot;...&quot;&gt;Credit {{ note.number }} - {{ note }}&lt;/th&gt;
+&lt;td class=&quot;...&quot;&gt;{{ note.total|currency }}&lt;/td&gt;
+&lt;/tr&gt;
+</code></pre>
 </details>
 <hr>
 <h2>defectquotes</h2>
@@ -353,6 +330,14 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 &lt;li&gt;Reference: {{ quote.ref }}&lt;a href=&quot;{{ base_url }}{{ quote.get_uuid_approval_url }}&quot;&gt; (approve online)&lt;/a&gt;&lt;/li&gt;
 {% endfor %}
 </code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;p&gt;Your defect quotes:&lt;/p&gt;
+&lt;ul&gt;
+{% for quote in defectquotes %}
+&lt;li&gt;Reference: {{ quote.ref }}&lt;a href=&quot;{{ base_url }}{{ quote.get_uuid_approval_url }}&quot;&gt; (approve online)&lt;/a&gt;&lt;/li&gt;
+{% endfor %}
+</code></pre>
 </details>
 <hr>
 <h2>digital_logbooks</h2>
@@ -368,6 +353,7 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
+<tr><td><code>logbook.name</code></td><td>{{ entry.logbook.name|default:&#x27;-&#x27; }}</td></tr>
 <tr><td><code>name</code></td><td>{{ logbook.name }}</td></tr>
 <tr><td><code>url</code></td><td>{{ entry.url }}</td></tr>
 </table>
@@ -383,11 +369,11 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 </code></pre>
 <hr>
 <pre><code class="language-django">
-&lt;p&gt;Your attached digital logbook entries:&lt;/p&gt;
-&lt;ul&gt;
-{% for logbook in digital_logbooks %}
-&lt;li&gt;{{ logbook.name }}&lt;/li&gt;
-{% endfor %}
+{% include &quot;reports/library/digital-logbook-icon.svg&quot; %}
+&lt;/div&gt;
+&lt;div class=&quot;...&quot;&gt;
+&lt;a href=&quot;{{ entry.url }}&quot;&gt;
+&lt;strong&gt;{{ entry.logbook.name|default:&#x27;-&#x27; }}&lt;/strong&gt;
 </code></pre>
 </details>
 <hr>
@@ -400,6 +386,13 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 </ul>
 </details>
 <details class="expandable-section">
+<summary>Properties</summary>
+<table>
+<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><td><code>routineservicetype.name</code></td><td>{{ line.routineservicetype.name }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
 &lt;/thead&gt;
@@ -407,6 +400,14 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 {% for line in doandchargelineitems %}
 &lt;tr class=&quot;...&quot;&gt;
 &lt;td&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;tbody&gt;
+{% for line in doandchargelineitems %}
+&lt;tr class=&quot;...&quot;&gt;
+&lt;td&gt;
+&lt;div&gt;
 </code></pre>
 </details>
 <hr>
@@ -440,21 +441,17 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>files</code></td><td>{% for file in entry.files %}</td></tr>
-<tr><td><code>logbook</code></td><td>{{ entry.logbook.name|default:&#x27;-&#x27; }}</td></tr>
-<tr><td><code>logbook.name</code></td><td>{{ entry.logbook.name|default:&#x27;-&#x27; }}</td></tr>
 <tr><td><code>preview_url</code></td><td>{{ file.preview_url }}</td></tr>
-<tr><td><code>url</code></td><td>{{ entry.url }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
 &lt;div class=&quot;...&quot;&gt;
-&lt;a href=&quot;{{ entry.url }}&quot;&gt;
 &lt;strong&gt;{{ entry.logbook.name|default:&#x27;-&#x27; }}&lt;/strong&gt;
+{% for file in entry.files %}
+&lt;a class=&quot;...&quot; href=&quot;{{ file.preview_url }}&quot;&gt;
 {% include &quot;reports/library/arrow-up-right-from-square-icon.svg&quot; with width=&quot;...&quot; height=&quot;...&quot; %}
-&lt;/a&gt;
 </code></pre>
 <hr>
 <pre><code class="language-django">
@@ -474,6 +471,13 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 </ul>
 </details>
 <details class="expandable-section">
+<summary>Properties</summary>
+<table>
+<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><td><code>routineservicetype.name</code></td><td>{{ line.routineservicetype.name }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
 &lt;/thead&gt;
@@ -481,6 +485,14 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 {% for line in fixedlineitems %}
 &lt;tr class=&quot;...&quot;&gt;
 &lt;td&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;tbody&gt;
+{% for line in fixedlineitems %}
+&lt;tr class=&quot;...&quot;&gt;
+&lt;td&gt;
+&lt;div&gt;
 </code></pre>
 </details>
 <hr>
@@ -502,33 +514,6 @@ Dear {{ attention|default:&#x27;valued customer&#x27; }},
 </code></pre>
 </details>
 <hr>
-<h2>inv</h2>
-<details class="expandable-section">
-<summary>Found in files</summary>
-<ul>
-<li>[AARHUSFIRE] - [emails] - <a href="https://AARHUSFIRE.onuptick.com/configuration/emails">Overdue Invoice Reminder Email</a></li>
-</ul>
-</details>
-<details class="expandable-section">
-<summary>Properties</summary>
-<table>
-<tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>due_date</code></td><td>{{ inv.due_date|date:&quot;jS F Y&quot; }}</td></tr>
-<tr><td><code>number</code></td><td>{{ inv.number }}</td></tr>
-<tr><td><code>ref</code></td><td>{{ inv.ref }}</td></tr>
-</table>
-</details>
-<details class="expandable-section">
-<summary>Usage Examples</summary>
-<pre><code class="language-django">
-Number: {{ inv.number }}&lt;br&gt;
-Reference: {{ inv.ref }}&lt;br&gt;
-Due: {{ inv.due_date|date:&quot;jS F Y&quot; }}&lt;br&gt;
-{% endfor %}
-For any questions please contact the office.&lt;/p&gt;
-</code></pre>
-</details>
-<hr>
 <h2>invoice</h2>
 <details class="expandable-section">
 <summary>Found in files</summary>
@@ -542,7 +527,6 @@ For any questions please contact the office.&lt;/p&gt;
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>billingcard</code></td><td>{{ invoice.billingcard.postal_address|linebreaksbr }}</td></tr>
 <tr><td><code>billingcard.postal_address</code></td><td>{{ invoice.billingcard.postal_address|linebreaksbr }}</td></tr>
 <tr><td><code>date</code></td><td>{{ invoice.date|date:&quot;jS F Y&quot;|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>description</code></td><td>{{ invoice.description|markdowner }}</td></tr>
@@ -599,6 +583,14 @@ For any questions please contact the office.&lt;/p&gt;
 Number: {{ inv.number }}&lt;br&gt;
 Reference: {{ inv.ref }}&lt;br&gt;
 </code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;p&gt;Dear {{ attention }},&lt;/p&gt;
+&lt;p&gt;This is a reminder that we are waiting for your payment on the following invoices:&lt;br&gt;
+{% for inv in invoices %}&lt;br&gt;
+Number: {{ inv.number }}&lt;br&gt;
+Reference: {{ inv.ref }}&lt;br&gt;
+</code></pre>
 </details>
 <hr>
 <h2>items</h2>
@@ -617,6 +609,14 @@ Reference: {{ inv.ref }}&lt;br&gt;
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;p&gt;We have received notification from {{ contractor.name }} that they are no longer engaged to maintain the following items:&lt;/p&gt;
+&lt;ul&gt;
+{% for item in items %}
+&lt;li&gt;{{ item.label }}&lt;/li&gt;
+{% endfor %}
+</code></pre>
+<hr>
 <pre><code class="language-django">
 &lt;p&gt;We have received notification from {{ contractor.name }} that they are no longer engaged to maintain the following items:&lt;/p&gt;
 &lt;ul&gt;
@@ -672,13 +672,20 @@ Reference: {{ inv.ref }}&lt;br&gt;
 &lt;tr&gt;
 &lt;td&gt;{{ tasksession.get_type_display }}&lt;/td&gt;
 </code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;/thead&gt;
+&lt;tbody&gt;
+{% for tasksession in labour_sessions %}
+&lt;tr&gt;
+&lt;td&gt;{{ tasksession.get_type_display }}&lt;/td&gt;
+</code></pre>
 </details>
 <hr>
 <h2>line</h2>
 <details class="expandable-section">
 <summary>Found in files</summary>
 <ul>
-<li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Purchase Order</a></li>
 <li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Service Quote (Routines)</a></li>
 <li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Service Quote (Totals only)</a></li>
 </ul>
@@ -687,34 +694,25 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>annual_subtotal</code></td><td>{{ line.annual_subtotal|currency }}</td></tr>
-<tr><td><code>description</code></td><td>{{ line.description|default:&#x27;-&#x27; }}</td></tr>
-<tr><td><code>gst</code></td><td>{{ line.gst|currency }}</td></tr>
 <tr><td><code>name</code></td><td>{{ rslt.name }}</td></tr>
-<tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:2 }}</td></tr>
-<tr><td><code>routineserviceleveltypes</code></td><td>{% for rslt in line.routineserviceleveltypes.all %}</td></tr>
-<tr><td><code>routineserviceleveltypes.all</code></td><td>{% for rslt in line.routineserviceleveltypes.all %}</td></tr>
-<tr><td><code>site_price</code></td><td>{{ line.site_price|currency }}</td></tr>
-<tr><td><code>subtotal</code></td><td>{{ line.subtotal|currency }}</td></tr>
-<tr><td><code>unit_price</code></td><td>{{ line.unit_price|currency }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-{% if line.product.sku %}&lt;div&gt;&lt;strong&gt;({{ line.product.sku }})&lt;/strong&gt;&lt;/div&gt;{% endif %}
-&lt;/td&gt;
-&lt;td&gt;{{ line.description|markdowner }}&lt;/td&gt;
-&lt;td class=&quot;...&quot;&gt;{{ line.quantity|floatformat:-2 }}&lt;/td&gt;
-&lt;td class=&quot;...&quot;&gt;{{ line.unit_price|currency }}&lt;/td&gt;
+&lt;div&gt;
+&lt;div&gt;{{ line.routineservicetype.name }}&lt;/div&gt;
+{% for rslt in line.routineserviceleveltypes.all %}
+&lt;span&gt;{{ rslt.name }}{% if not forloop.last %},{% endif %}&lt;/span&gt;
+{% endfor %}
 </code></pre>
 <hr>
 <pre><code class="language-django">
-&lt;/td&gt;
-&lt;td&gt;{{ line.description|markdowner }}&lt;/td&gt;
-&lt;td class=&quot;...&quot;&gt;{{ line.quantity|floatformat:-2 }}&lt;/td&gt;
-&lt;td class=&quot;...&quot;&gt;{{ line.unit_price|currency }}&lt;/td&gt;
-&lt;td class=&quot;...&quot;&gt;{{ line.subtotal|currency }}&lt;/td&gt;
+&lt;div&gt;
+&lt;div&gt;{{ line.routineservicetype.name }}&lt;/div&gt;
+{% for rslt in line.routineserviceleveltypes.all %}
+&lt;span&gt;{{ rslt.name }}{% if not forloop.last %},{% endif %}&lt;/span&gt;
+{% endfor %}
 </code></pre>
 </details>
 <hr>
@@ -722,8 +720,6 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <details class="expandable-section">
 <summary>Found in files</summary>
 <ul>
-<li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Consolidated Invoice</a></li>
-<li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Invoice</a></li>
 <li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Itemised w Prices	</a></li>
 <li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Itemised w Qty	</a></li>
 </ul>
@@ -732,17 +728,13 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>asset</code></td><td>{{ lineitem.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
 <tr><td><code>asset.get_label</code></td><td>{{ lineitem.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
 <tr><td><code>description</code></td><td>{{ lineitem.description|markdowner|default:&quot;-&quot; }}</td></tr>
-<tr><td><code>gst</code></td><td>{{ lineitem.gst|currency }}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:2 }}</td></tr>
-<tr><td><code>remark</code></td><td>{{ lineitem.remark.get_description|markdowner }}</td></tr>
 <tr><td><code>remark.get_description</code></td><td>{{ lineitem.remark.get_description|markdowner }}</td></tr>
 <tr><td><code>remark.get_public_url</code></td><td>{{ lineitem.remark.get_public_url|absolute }}</td></tr>
 <tr><td><code>remark.get_resolution</code></td><td>{{ lineitem.remark.get_resolution|markdowner }}</td></tr>
 <tr><td><code>remark.location</code></td><td>{{ lineitem.remark.location|markdowner }}</td></tr>
-<tr><td><code>subtotal</code></td><td>{{ lineitem.subtotal|currency }}</td></tr>
 <tr><td><code>unit_price</code></td><td>{{ lineitem.unit_price|currency }}</td></tr>
 </table>
 </details>
@@ -776,40 +768,29 @@ ID: {{ lineitem.remark.id }}
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>cost_summary</code></td><td>{{ lineitem_group.cost_summary.total|currency }}</td></tr>
-<tr><td><code>cost_summary.gst</code></td><td>{{ lineitem_group.cost_summary.gst|currency }}</td></tr>
-<tr><td><code>cost_summary.subtotal</code></td><td>{{ lineitem_group.cost_summary.subtotal|currency }}</td></tr>
-<tr><td><code>cost_summary.total</code></td><td>{{ lineitem_group.cost_summary.total|currency }}</td></tr>
 <tr><td><code>description</code></td><td>{{ lineitem.description|markdowner }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ lineitem.gst|currency }}</td></tr>
-<tr><td><code>lineitems</code></td><td>{% for lineitem in lineitem_group.lineitems %}</td></tr>
-<tr><td><code>property</code></td><td>{{ lineitem_group.property.client_ref}}</td></tr>
-<tr><td><code>property.client_ref</code></td><td>{{ lineitem_group.property.client_ref}}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:2 }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ lineitem.subtotal|currency }}</td></tr>
-<tr><td><code>task</code></td><td>{{ lineitem_group.task.description|markdowner }}</td></tr>
-<tr><td><code>task.description</code></td><td>{{ lineitem_group.task.description|markdowner }}</td></tr>
-<tr><td><code>task.invoice_note</code></td><td>{{ lineitem_group.task.invoice_note|markdowner }}</td></tr>
-<tr><td><code>task.scope_of_works</code></td><td>{{ lineitem_group.task.scope_of_works|markdowner }}</td></tr>
 <tr><td><code>unit_price</code></td><td>{{ lineitem.unit_price|currency }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-&lt;dt class=&quot;...&quot;&gt;Property: &lt;/dt&gt;
-{% if lineitem_group.property %}
-&lt;dd class=&quot;...&quot;&gt;{{ lineitem_group.property.ref }} {{ lineitem_group.property.name }} {% if lineitem_group.property.client_ref %}({{ lineitem_group.property.client_ref}}){% endif %}&lt;/dd&gt;
-&lt;/div&gt;
-&lt;div class=&quot;...&quot;&gt;
+&lt;/thead&gt;
+&lt;tbody class=&quot;...&quot;&gt;
+{% for lineitem in lineitem_group.lineitems %}
+&lt;tr&gt;
+&lt;td&gt;{{ lineitem.description|markdowner }}&lt;/td&gt;
 </code></pre>
 <hr>
 <pre><code class="language-django">
-&lt;div class=&quot;...&quot;&gt;
-&lt;dt class=&quot;...&quot;&gt;Scope: &lt;/dt&gt;
-&lt;dd class=&quot;...&quot;&gt;{% if lineitem_group.task.scope_of_works %}{{ lineitem_group.task.scope_of_works|markdowner }} {% else %}{{ lineitem_group.task.description|markdowner }}{% endif %}&lt;/dd&gt;
-&lt;/div&gt;
-&lt;div class=&quot;...&quot;&gt;
+&lt;/thead&gt;
+&lt;tbody class=&quot;...&quot;&gt;
+{% for lineitem in lineitem_group.lineitems %}
+&lt;tr&gt;
+&lt;td&gt;{{ lineitem.description|markdowner }}&lt;/td&gt;
 </code></pre>
 </details>
 <hr>
@@ -826,8 +807,10 @@ ID: {{ lineitem.remark.id }}
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>description</code></td><td>{{ lineitem.description|markdowner }}</td></tr>
-<tr><td><code>gst</code></td><td>{{ line.gst|currency }}</td></tr>
-<tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:2 }}</td></tr>
+<tr><td><code>gst</code></td><td>{{ lineitem.gst|currency }}</td></tr>
+<tr><td><code>product.name</code></td><td>{{ line.product.name }}</td></tr>
+<tr><td><code>product.sku</code></td><td>{{ line.product.sku }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:-2 }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ lineitem.subtotal|currency }}</td></tr>
 <tr><td><code>unit_price</code></td><td>{{ lineitem.unit_price|currency }}</td></tr>
 </table>
@@ -845,9 +828,9 @@ ID: {{ lineitem.remark.id }}
 <pre><code class="language-django">
 &lt;/thead&gt;
 &lt;tbody&gt;
-{% for lineitem in lineitems %}
+{% for line in lineitems %}
 &lt;tr&gt;
-&lt;td&gt;{{ lineitem.description|markdowner }}&lt;/td&gt;
+&lt;td&gt;
 </code></pre>
 </details>
 <hr>
@@ -870,6 +853,14 @@ ID: {{ lineitem.remark.id }}
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;/thead&gt;
+&lt;tbody&gt;
+{% for row in maintenance_summary %}
+&lt;tr&gt;
+&lt;td&gt;{{ row.service }}&lt;/td&gt;
+</code></pre>
+<hr>
 <pre><code class="language-django">
 &lt;/thead&gt;
 &lt;tbody&gt;
@@ -904,31 +895,13 @@ ID: {{ lineitem.remark.id }}
 &lt;tr&gt;
 &lt;td&gt;{{ technician.name }}&lt;/td&gt;
 </code></pre>
-</details>
 <hr>
-<h2>note</h2>
-<details class="expandable-section">
-<summary>Found in files</summary>
-<ul>
-<li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Consolidated Invoice</a></li>
-</ul>
-</details>
-<details class="expandable-section">
-<summary>Properties</summary>
-<table>
-<tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>number</code></td><td>{{ note.number }}</td></tr>
-<tr><td><code>total</code></td><td>{{ note.total|currency }}</td></tr>
-</table>
-</details>
-<details class="expandable-section">
-<summary>Usage Examples</summary>
 <pre><code class="language-django">
+&lt;/thead&gt;
+&lt;tbody&gt;
+{% for technician in maintenance_technicians %}
 &lt;tr&gt;
-&lt;th class=&quot;...&quot;&gt;Credit {{ note.number }} - {{ note }}&lt;/th&gt;
-&lt;td class=&quot;...&quot;&gt;{{ note.total|currency }}&lt;/td&gt;
-&lt;/tr&gt;
-{% endfor %}
+&lt;td&gt;{{ technician.name }}&lt;/td&gt;
 </code></pre>
 </details>
 <hr>
@@ -941,6 +914,13 @@ ID: {{ lineitem.remark.id }}
 </ul>
 </details>
 <details class="expandable-section">
+<summary>Properties</summary>
+<table>
+<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><td><code>logbook.name</code></td><td>{{ entry.logbook.name|default:&#x27;-&#x27; }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
 &lt;div class=&quot;...&quot;&gt;Logbooks&lt;/div&gt;
@@ -948,6 +928,14 @@ ID: {{ lineitem.remark.id }}
 {% for entry in paper_logbooks %}
 &lt;div class=&quot;...&quot;&gt;
 &lt;div class=&quot;...&quot;&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+{% include &quot;reports/library/paper-logbook-icon.svg&quot; %}
+&lt;/div&gt;
+&lt;div class=&quot;...&quot;&gt;
+&lt;div class=&quot;...&quot;&gt;
+&lt;strong&gt;{{ entry.logbook.name|default:&#x27;-&#x27; }}&lt;/strong&gt;
 </code></pre>
 </details>
 <hr>
@@ -1000,6 +988,7 @@ ID: {{ lineitem.remark.id }}
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>description</code></td><td>{{ line.description|default:&#x27;-&#x27; }}</td></tr>
+<tr><td><code>product.name</code></td><td>{{ line.product.name }}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:2 }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ line.subtotal|currency }}</td></tr>
 <tr><td><code>unit_price</code></td><td>{{ line.unit_price|currency }}</td></tr>
@@ -1013,6 +1002,14 @@ ID: {{ lineitem.remark.id }}
 {% for line in productlineitems %}
 &lt;tr class=&quot;...&quot;&gt;
 &lt;td&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;tbody&gt;
+{% for line in productlineitems %}
+&lt;tr class=&quot;...&quot;&gt;
+&lt;td&gt;
+&lt;div&gt;{{ line.product.name }}&lt;/div&gt;
 </code></pre>
 </details>
 <hr>
@@ -1040,25 +1037,7 @@ ID: {{ lineitem.remark.id }}
 &lt;li&gt;&lt;a href=&quot;{{base_url}}/properties/{{property.property_id}}/view/assets/?is_covered_by_routine=False&amp;is_active=True&quot;&gt;{{ property.property__name }}&lt;/a&gt;&lt;/li&gt;
 {% endfor %}
 </code></pre>
-</details>
 <hr>
-<h2>property</h2>
-<details class="expandable-section">
-<summary>Found in files</summary>
-<ul>
-<li>[AARHUSFIRE] - [emails] - <a href="https://AARHUSFIRE.onuptick.com/configuration/emails">Monthly Uncovered Assets</a></li>
-</ul>
-</details>
-<details class="expandable-section">
-<summary>Properties</summary>
-<table>
-<tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>property__name</code></td><td>{{ property.property__name }}</td></tr>
-<tr><td><code>property_id</code></td><td>{{property.property_id}}</td></tr>
-</table>
-</details>
-<details class="expandable-section">
-<summary>Usage Examples</summary>
 <pre><code class="language-django">
 &lt;ul&gt;
 {% for property in properties %}
@@ -1096,7 +1075,6 @@ ID: {{ lineitem.remark.id }}
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>created</code></td><td>{{ purchaseorder.created|date:&quot;jS F Y&quot; }}</td></tr>
-<tr><td><code>currency</code></td><td>{{ purchaseorder.currency }}</td></tr>
 <tr><td><code>delivery_instructions</code></td><td>{{ purchaseorder.delivery_instructions|markdowner }}</td></tr>
 <tr><td><code>description</code></td><td>{{ purchaseorder.description|markdowner }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ purchaseorder.gst|currency }}</td></tr>
@@ -1171,11 +1149,20 @@ ID: {{ lineitem.remark.id }}
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>get_uuid_approval_url</code></td><td>{{ quote.get_uuid_approval_url }}</td></tr>
+<tr><td><code>property.name</code></td><td>{{ quote.property.name }}</td></tr>
 <tr><td><code>ref</code></td><td>{{ quote.ref }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;p&gt;You have been selected as the main recipient or a CC in this repeating reminder.&lt;/p&gt;
+&lt;p&gt;We are waiting for approval for the following defect quotes:&lt;/p&gt;
+{% for quote in quotes %}
+&lt;p&gt;
+&lt;div&gt;Reference: {{ quote.ref }}&lt;/div&gt;
+</code></pre>
+<hr>
 <pre><code class="language-django">
 &lt;p&gt;You have been selected as the main recipient or a CC in this repeating reminder.&lt;/p&gt;
 &lt;p&gt;We are waiting for approval for the following defect quotes:&lt;/p&gt;
@@ -1196,7 +1183,6 @@ ID: {{ lineitem.remark.id }}
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>ref</code></td><td>{{ rectification.ref }}</td></tr>
 <tr><td><code>rejection_reason</code></td><td>{{ rectification.rejection_reason|markdowner }}</td></tr>
 </table>
 </details>
@@ -1223,11 +1209,9 @@ ID: {{ lineitem.remark.id }}
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>asset</code></td><td>{{ repair.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
 <tr><td><code>asset.get_label</code></td><td>{{ repair.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
 <tr><td><code>notes</code></td><td>{{ repair.notes|default:repair.product.description|default:repair.product.name }}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ repair.quantity|floatformat:2 }}</td></tr>
-<tr><td><code>remark</code></td><td>{{ repair.remark.location|markdowner }}</td></tr>
 <tr><td><code>remark.get_description</code></td><td>{{ repair.remark.get_description|markdowner }}</td></tr>
 <tr><td><code>remark.get_public_url</code></td><td>{{ repair.remark.get_public_url|absolute }}</td></tr>
 <tr><td><code>remark.get_resolution</code></td><td>{{ repair.remark.get_resolution|markdowner }}</td></tr>
@@ -1253,32 +1237,6 @@ ID: {{ repair.remark.id }}
 </code></pre>
 </details>
 <hr>
-<h2>report</h2>
-<details class="expandable-section">
-<summary>Found in files</summary>
-<ul>
-<li>[AARHUSFIRE] - [emails] - <a href="https://AARHUSFIRE.onuptick.com/configuration/emails">Issuance</a></li>
-</ul>
-</details>
-<details class="expandable-section">
-<summary>Properties</summary>
-<table>
-<tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>compliant</code></td><td>{{ report.compliant|yesno:&quot;compliant,non-compliant,not applicable&quot;}}</td></tr>
-<tr><td><code>get_title</code></td><td>{{ report.get_title }}</td></tr>
-</table>
-</details>
-<details class="expandable-section">
-<summary>Usage Examples</summary>
-<pre><code class="language-django">
-&lt;ul&gt;
-{% for report in reports %}
-&lt;li&gt;{{ report.get_title }} ({{ report.compliant|yesno:&quot;compliant,non-compliant,not applicable&quot;}})&lt;/li&gt;
-{% endfor %}
-&lt;/ul&gt;
-</code></pre>
-</details>
-<hr>
 <h2>reports</h2>
 <details class="expandable-section">
 <summary>Found in files</summary>
@@ -1296,6 +1254,14 @@ ID: {{ repair.remark.id }}
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;p&gt;Your reports:&lt;/p&gt;
+&lt;ul&gt;
+{% for report in reports %}
+&lt;li&gt;{{ report.get_title }} ({{ report.compliant|yesno:&quot;compliant,non-compliant,not applicable&quot;}})&lt;/li&gt;
+{% endfor %}
+</code></pre>
+<hr>
 <pre><code class="language-django">
 &lt;p&gt;Your reports:&lt;/p&gt;
 &lt;ul&gt;
@@ -1348,6 +1314,13 @@ ID: {{ repair.remark.id }}
 </ul>
 </details>
 <details class="expandable-section">
+<summary>Properties</summary>
+<table>
+<tr><th>Property</th><th>Example Usage</th></tr>
+<tr><td><code>routineservicetype.name</code></td><td>{{ line.routineservicetype.name }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
 &lt;/thead&gt;
@@ -1355,6 +1328,14 @@ ID: {{ repair.remark.id }}
 {% for line in servicelineitems %}
 {% if line.routineservicetype and line.billingcontract_type == &quot;F&quot; %}
 &lt;tr class=&quot;...&quot;&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+{% for line in servicelineitems %}
+{% if line.routineservicetype and line.billingcontract_type == &quot;F&quot; %}
+&lt;tr class=&quot;...&quot;&gt;
+&lt;td&gt;
+&lt;div&gt;
 </code></pre>
 </details>
 <hr>
@@ -1375,11 +1356,9 @@ ID: {{ repair.remark.id }}
 <tr><td><code>annual_tax</code></td><td>{{ servicequote.annual_tax|currency }}</td></tr>
 <tr><td><code>annual_total</code></td><td>{{ servicequote.annual_total|currency }}</td></tr>
 <tr><td><code>created</code></td><td>{{ servicequote.created|date:&quot;jS F Y&quot; }}</td></tr>
-<tr><td><code>expiry_date</code></td><td>{{ servicequote.expiry_date }}</td></tr>
 <tr><td><code>product_gst</code></td><td>{{ servicequote.product_gst|currency }}</td></tr>
 <tr><td><code>product_subtotal</code></td><td>{{ servicequote.product_subtotal|currency }}</td></tr>
 <tr><td><code>product_total</code></td><td>{{ servicequote.product_total|currency }}</td></tr>
-<tr><td><code>ref</code></td><td>{{ servicequote.ref }}</td></tr>
 <tr><td><code>scope_of_works</code></td><td>{{ servicequote.scope_of_works|markdowner }}</td></tr>
 <tr><td><code>terms_and_conditions</code></td><td>{{ servicequote.terms_and_conditions|markdowner }}</td></tr>
 </table>
@@ -1445,6 +1424,14 @@ ID: {{ repair.remark.id }}
 &lt;div class=&quot;...&quot;&gt;
 &lt;div class=&quot;...&quot;&gt;{% cdn_image signature.path height=100 crop=&quot;fill&quot; type=&quot;authenticated&quot; %}&lt;/div&gt;
 </code></pre>
+<hr>
+<pre><code class="language-django">
+{% for signature in signatures %}
+&lt;div class=&quot;...&quot;&gt;
+&lt;div class=&quot;...&quot;&gt;{% cdn_image signature.path height=100 crop=&quot;fill&quot; type=&quot;authenticated&quot; %}&lt;/div&gt;
+&lt;div class=&quot;...&quot;&gt;{{ signature.filename }}&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 </details>
 <hr>
 <h2>signoff</h2>
@@ -1458,24 +1445,18 @@ ID: {{ repair.remark.id }}
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>account</code></td><td>{{ signoff.account }}</td></tr>
-<tr><td><code>contractor</code></td><td>{{ signoff.contractor }}</td></tr>
-<tr><td><code>period_finish</code></td><td>{{ signoff.period_finish }}</td></tr>
 <tr><td><code>period_start</code></td><td>{{ signoff.period_start}}</td></tr>
-<tr><td><code>pk</code></td><td>{{ signoff.pk }}</td></tr>
 <tr><td><code>property</code></td><td>{{ signoffproperty.property }}</td></tr>
-<tr><td><code>signoffproperty_set</code></td><td>{% for signoffproperty in signoff.signoffproperty_set.all %}</td></tr>
-<tr><td><code>signoffproperty_set.all</code></td><td>{% for signoffproperty in signoff.signoffproperty_set.all %}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-{% block content %}
 &lt;h3&gt;Contractor sign off {{ signoff.pk }} results for {{ signoff.contractor }}&lt;/h3&gt;
 &lt;h4&gt;Submitted by {{ signoff.account }} for {{ signoff.period_start}} to {{ signoff.period_finish }}.&lt;/h4&gt;
 {% for signoffproperty in signoff.signoffproperty_set.all %}
 &lt;h5&gt;{{ signoffproperty.property }}&lt;/h5&gt;
+&lt;ul&gt;
 </code></pre>
 <hr>
 <pre><code class="language-django">
@@ -1484,39 +1465,6 @@ ID: {{ repair.remark.id }}
 {% for signoffproperty in signoff.signoffproperty_set.all %}
 &lt;h5&gt;{{ signoffproperty.property }}&lt;/h5&gt;
 &lt;ul&gt;
-</code></pre>
-</details>
-<hr>
-<h2>signoffitem</h2>
-<details class="expandable-section">
-<summary>Found in files</summary>
-<ul>
-<li>[AARHUSFIRE] - [emails] - <a href="https://AARHUSFIRE.onuptick.com/configuration/emails">Signoff Response</a></li>
-</ul>
-</details>
-<details class="expandable-section">
-<summary>Properties</summary>
-<table>
-<tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>new_is_compliant</code></td><td>{{ signoffitem.new_is_compliant|yesno:&quot;compliant,non-compliant&quot; }}</td></tr>
-</table>
-</details>
-<details class="expandable-section">
-<summary>Usage Examples</summary>
-<pre><code class="language-django">
-&lt;em&gt;no change&lt;/em&gt;
-{% else %}
-&lt;strong style=&quot;...&quot;green,red&quot; }}&quot;&gt;changed to {{ signoffitem.new_is_compliant|yesno:&quot;compliant,non-compliant&quot; }}&lt;/strong&gt;
-{% endif %}
-{% endif %}
-</code></pre>
-<hr>
-<pre><code class="language-django">
-&lt;em&gt;no change&lt;/em&gt;
-{% else %}
-&lt;strong style=&quot;...&quot;green,red&quot; }}&quot;&gt;changed to {{ signoffitem.new_is_compliant|yesno:&quot;compliant,non-compliant&quot; }}&lt;/strong&gt;
-{% endif %}
-{% endif %}
 </code></pre>
 </details>
 <hr>
@@ -1534,23 +1482,25 @@ ID: {{ repair.remark.id }}
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>created</code></td><td>{{ signoffproperty.created|date }}</td></tr>
 <tr><td><code>due</code></td><td>{{ signoffproperty.due|date }}</td></tr>
+<tr><td><code>property.name</code></td><td>{{ signoffproperty.property.name }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-{% extends &#x27;email.html&#x27; %}
-{% block content %}
-&lt;h4&gt;Request{{ signoffproperties|pluralize }} for {{ contractor.name }} ({{ contractor.account }}).&lt;/h4&gt;
-&lt;p&gt;In order to issue compliant reports, we require confirmation that you, as a service contractor, have serviced the relevant Essential Safety Measures to Australian Standards over the previous 12 months.&lt;/p&gt;
-&lt;table border=&quot;...&quot; cellpadding=&quot;...&quot; cellspacing=&quot;...&quot; bgcolor=&quot;...&quot; width=&quot;...&quot;&gt;
+&lt;p&gt;We have the following propert{{ signoffproperties|pluralize:&quot;y,ies&quot; }} listed as requiring confirmation of servicing&lt;/p&gt;
+&lt;ul&gt;
+{% for signoffproperty in signoffproperties %}
+&lt;li&gt;
+&lt;h5&gt;{{ signoffproperty.property.name }}&lt;/h5&gt;
 </code></pre>
 <hr>
 <pre><code class="language-django">
-&lt;/table&gt;
-&lt;br&gt;&lt;p&gt;We have the following propert{{ signoffproperties|pluralize:&quot;y,ies&quot; }} listed as requiring confirmation of servicing&lt;/p&gt;
+&lt;p&gt;We have the following propert{{ signoffproperties|pluralize:&quot;y,ies&quot; }} listed as requiring confirmation of servicing&lt;/p&gt;
 &lt;ul&gt;
 {% for signoffproperty in signoffproperties %}
+&lt;li&gt;
+&lt;h5&gt;{{ signoffproperty.property.name }}&lt;/h5&gt;
 </code></pre>
 </details>
 <hr>
@@ -1559,8 +1509,6 @@ ID: {{ repair.remark.id }}
 <summary>Found in files</summary>
 <ul>
 <li>[AARHUSFIRE] - [emails] - <a href="https://AARHUSFIRE.onuptick.com/configuration/emails">Signoff Disclaimed</a></li>
-<li>[AARHUSFIRE] - [emails] - <a href="https://AARHUSFIRE.onuptick.com/configuration/emails">Signoff Reminder</a></li>
-<li>[AARHUSFIRE] - [emails] - <a href="https://AARHUSFIRE.onuptick.com/configuration/emails">Signoff Request</a></li>
 <li>[AARHUSFIRE] - [emails] - <a href="https://AARHUSFIRE.onuptick.com/configuration/emails">Signoff Response</a></li>
 </ul>
 </details>
@@ -1568,34 +1516,29 @@ ID: {{ repair.remark.id }}
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>created</code></td><td>{{ signoffproperty.created|date }}</td></tr>
 <tr><td><code>disclaimed_reason</code></td><td>{{signoffproperty.disclaimed_reason}}</td></tr>
-<tr><td><code>due</code></td><td>{{ signoffproperty.due|date }}</td></tr>
-<tr><td><code>is_disclaimed</code></td><td>{{ signoffproperty.is_disclaimed }}</td></tr>
 <tr><td><code>label</code></td><td>{{ signoffitem.label }}</td></tr>
-<tr><td><code>new_is_compliant</code></td><td>{{ signoffitem.new_is_compliant|yesno:&quot;compliant,non-compliant&quot; }}</td></tr>
+<tr><td><code>new_is_compliant</code></td><td>{{ signoffitem.new_is_compliant|yesno:&quot;green,red&quot; }}</td></tr>
 <tr><td><code>new_serviced_date</code></td><td>{{ signoffitem.new_serviced_date }}</td></tr>
 <tr><td><code>new_signoff_note</code></td><td>{{ signoffitem.new_signoff_note }}</td></tr>
-<tr><td><code>note</code></td><td>{{ signoffproperty.note }}</td></tr>
-<tr><td><code>property</code></td><td>{{ signoffproperty.property }}</td></tr>
-<tr><td><code>signoffitem_set</code></td><td>{% for signoffitem in signoffproperty.signoffitem_set.all %}</td></tr>
-<tr><td><code>signoffitem_set.all</code></td><td>{% for signoffitem in signoffproperty.signoffitem_set.all %}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-&lt;h5&gt;{{ signoffproperty.property.name }}&lt;/h5&gt;
-&lt;p&gt;
-Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffproperty.created|date }}.
-&lt;/p&gt;
+&lt;h5&gt;{{ signoffproperty.property }}&lt;/h5&gt;
+&lt;ul&gt;
+{% for signoffitem in signoffproperty.signoffitem_set.all %}
+&lt;li&gt;
+[
 </code></pre>
 <hr>
 <pre><code class="language-django">
-&lt;p&gt;
-Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffproperty.created|date }}.
-&lt;/p&gt;
-&lt;/li&gt;
+&lt;em&gt;no submission&lt;/em&gt;
+{% else %}
+{% if signoffitem.is_compliant == signoffitem.new_is_compliant %}
+&lt;em&gt;no change&lt;/em&gt;
+{% else %}
 </code></pre>
 </details>
 <hr>
@@ -1652,7 +1595,6 @@ Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffpr
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>get_uuid_approval_url</code></td><td>{{ task_origin_defectquote.get_uuid_approval_url|absolute }}</td></tr>
-<tr><td><code>ref</code></td><td>{{ task_origin_defectquote.ref }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -1699,6 +1641,7 @@ Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffpr
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>address</code></td><td>{{ task.address }}</td></tr>
 <tr><td><code>description</code></td><td>{{ task.description }}</td></tr>
+<tr><td><code>property.name</code></td><td>{{ task.property.name }}</td></tr>
 <tr><td><code>ref</code></td><td>{{ task.ref }}</td></tr>
 </table>
 </details>
@@ -1711,43 +1654,13 @@ Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffpr
 &lt;p&gt;Task {{ task.ref }}&lt;/p&gt;
 &lt;p&gt;{{ task.description }}&lt;/p&gt;
 </code></pre>
-</details>
-<hr>
-<h2>tasksession</h2>
-<details class="expandable-section">
-<summary>Found in files</summary>
-<ul>
-<li>[AARHUSFIRE] - [templates] - <a href="https://AARHUSFIRE.onuptick.com/configuration/templates">Service Report (Prompts)</a></li>
-<li>[ABACUSFAS] - [emails] - <a href="https://ABACUSFAS.onuptick.com/configuration/emails">test</a></li>
-</ul>
-</details>
-<details class="expandable-section">
-<summary>Properties</summary>
-<table>
-<tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>finished</code></td><td>{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:i&#x27;|default:&quot;(still in progress)&quot; }}</td></tr>
-<tr><td><code>get_duration</code></td><td>{{ tasksession.get_duration|duration }}</td></tr>
-<tr><td><code>get_type_display</code></td><td>{{ tasksession.get_type_display }}</td></tr>
-<tr><td><code>started</code></td><td>{{ tasksession.started|timezone:tasksession.timezone|date:&#x27;d/m/Y H:i&#x27; }}</td></tr>
-<tr><td><code>technician</code></td><td>{{ tasksession.technician }}</td></tr>
-</table>
-</details>
-<details class="expandable-section">
-<summary>Usage Examples</summary>
-<pre><code class="language-django">
-&lt;td&gt;{{ tasksession.get_type_display }}&lt;/td&gt;
-&lt;td&gt;{{ tasksession.technician }}&lt;/td&gt;
-&lt;td&gt;{{ tasksession.started|timezone:tasksession.timezone|date:&#x27;d/m/Y H:i&#x27; }} -
-{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:i&#x27;|default:&quot;(still in progress)&quot; }}&lt;/td&gt;
-&lt;td&gt;{{ tasksession.get_duration|duration }}&lt;/td&gt;
-</code></pre>
 <hr>
 <pre><code class="language-django">
-&lt;td&gt;{{ tasksession.technician }}&lt;/td&gt;
-&lt;td&gt;{{ tasksession.started|timezone:tasksession.timezone|date:&#x27;d/m/Y H:i&#x27; }} -
-{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:i&#x27;|default:&quot;(still in progress)&quot; }}&lt;/td&gt;
-&lt;td&gt;{{ tasksession.get_duration|duration }}&lt;/td&gt;
-&lt;/tr&gt;
+&lt;p&gt;Dear {{ contractor_contact.name }},&lt;/p&gt;
+&lt;p&gt;You have been assigned the following tasks:&lt;/p&gt;
+{% for task in tasks %}
+&lt;p&gt;Task {{ task.ref }}&lt;/p&gt;
+&lt;p&gt;{{ task.description }}&lt;/p&gt;
 </code></pre>
 </details>
 <hr>
@@ -1763,14 +1676,20 @@ Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffpr
 <summary>Properties</summary>
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
-<tr><td><code>accreditations</code></td><td>{% for accreditation in technician.accreditations %}</td></tr>
-<tr><td><code>inspected_date</code></td><td>{{ technician.inspected_date }}</td></tr>
 <tr><td><code>name</code></td><td>{{accreditation.name}}</td></tr>
 <tr><td><code>number</code></td><td>{{ accreditation.number }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;td&gt;{{ technician.inspected_date }}&lt;/td&gt;
+&lt;td&gt;
+{% for accreditation in technician.accreditations %}
+&lt;div&gt;{{accreditation.name}}: {{ accreditation.number }}&lt;/div&gt;
+{% endfor %}
+</code></pre>
+<hr>
 <pre><code class="language-django">
 &lt;td&gt;{{ technician.inspected_date }}&lt;/td&gt;
 &lt;td&gt;
