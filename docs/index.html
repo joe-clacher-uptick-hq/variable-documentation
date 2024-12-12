@@ -991,7 +991,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>annual_subtotal</code></td><td>{{ line.annual_subtotal|currency }}</td></tr>
-<tr><td><code>description</code></td><td>{{ line.description|markdowner }}</td></tr>
+<tr><td><code>description</code></td><td>{{ line.description|default:&#x27;-&#x27; }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ line.gst|currency }}</td></tr>
 <tr><td><code>product.name</code></td><td>{{ line.product.name }}</td></tr>
 <tr><td><code>product.sku</code></td><td>{{ line.product.sku }}</td></tr>
@@ -1070,7 +1070,7 @@ Reference: {{ inv.ref }}&lt;br&gt;
 <table>
 <tr><th>Property</th><th>Example Usage</th></tr>
 <tr><td><code>asset.get_label</code></td><td>{{ lineitem.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
-<tr><td><code>description</code></td><td>{{ lineitem.description|markdowner }}</td></tr>
+<tr><td><code>description</code></td><td>{{ lineitem.description|markdowner|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ lineitem.gst|currency }}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:2 }}</td></tr>
 <tr><td><code>remark.get_description</code></td><td>{{ lineitem.remark.get_description|markdowner }}</td></tr>
@@ -1574,7 +1574,7 @@ ID: {{ lineitem.remark.id }}
 <tr><td><code>description</code></td><td>{{ purchaseorder.description|markdowner }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ purchaseorder.gst|currency }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ purchaseorder.subtotal|currency }}</td></tr>
-<tr><td><code>total</code></td><td>{{ purchaseorder.total|currency }}</td></tr>
+<tr><td><code>total</code></td><td>{{ purchaseorder.total|floatformat:2 }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -2332,11 +2332,11 @@ Due: {{ signoffproperty.due|date }}&lt;br&gt;As per the email sent {{ signoffpr
                                     When working with a collection (tasks), this variable (task) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;p&gt;Dear {{ contractor_contact.name }},&lt;/p&gt;
+                                    <div class="example-code">&lt;p&gt;Dear {{ contractor }},&lt;/p&gt;
 &lt;p&gt;You have been assigned the following tasks:&lt;/p&gt;
 {% for task in tasks %}
-&lt;p&gt;Task {{ task.ref }}&lt;/p&gt;
-&lt;p&gt;{{ task.description }}&lt;/p&gt;</div>
+&lt;p&gt;
+Task {{ task.ref }}&lt;br&gt;</div>
                                 </div>
                             </span>
                         </div>
