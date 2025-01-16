@@ -241,7 +241,7 @@
                                     When working with a collection (technician), this variable (accreditation) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/td&gt;
+                                    <div class="example-code">&lt;td&gt;{{ task.status_changed_inspected }}&lt;/td&gt;
 &lt;td&gt;
 {% for accreditation in technician.accreditations %}
 &lt;div&gt;{{accreditation.name}}: {{ accreditation.number }}&lt;/div&gt;
@@ -2753,7 +2753,7 @@
                                     When working with a collection (form_responses), this variable (form_response) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">{% if task %}
+                                    <div class="example-code">{% load dynamicforms_helpers %}
 {% get_form_responses task=task as form_responses %}
 {% for form_response in form_responses %}
 {{ form_response.render|safe }}
@@ -3118,8 +3118,8 @@
                                     <div class="example-code">&lt;/thead&gt;
 &lt;tbody&gt;
 {% for line in productlineitems %}
-&lt;tr class=&quot;keep-together&quot;&gt;
-&lt;td&gt;{{ line.product.name }}&lt;/td&gt;</div>
+{% if line.unit_price != 0 %}
+&lt;tr class=&quot;keep-together&quot;&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -3166,10 +3166,10 @@
                                     When working with a collection (servicelineitems), this variable (line) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/thead&gt;
-&lt;tbody&gt;
+                                    <div class="example-code">&lt;/td&gt;
+&lt;/tr&gt;
 {% for line in servicelineitems %}
-{% if line.service %}
+{% if line.routineservicetype and line.billingcontract_type == &quot;F&quot; %}
 &lt;tr class=&quot;keep-together&quot;&gt;</div>
                                 </div>
                             </span>
@@ -3187,7 +3187,7 @@
 &lt;tbody&gt;
 {% for line in lineitems %}
 &lt;tr&gt;
-&lt;td&gt;{{ line.description|markdowner }}&lt;/td&gt;</div>
+&lt;td&gt;{{ line.description }}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -4283,11 +4283,11 @@
                                     When working with a collection (lineitems), this variable (lineitem) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/th&gt;
-&lt;/tr&gt;
+                                    <div class="example-code">&lt;/thead&gt;
+&lt;tbody class=&quot;table-striped table-bordered&quot;&gt;
 {% for lineitem in lineitems %}
 &lt;tr&gt;
-&lt;td class=&quot;indent&quot;&gt;</div>
+&lt;td&gt;{{ lineitem.description|markdowner }}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -5770,10 +5770,10 @@
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
                                     <div class="example-code">{% if photos %}
-&lt;div class=&quot;d-flex flex-row flex-wrap&quot;&gt;
+&lt;span class=&quot;d-block photo-row my-1&quot;&gt;
 {% for photo in photos %}
-{% include &quot;webtemplates/2022-photo-tile&quot; with photo=photo class=&#x27;mr-3&#x27; %}
-{% endfor %}</div>
+&lt;a href=&quot;{% cdn_image_url photo.path type=&quot;authenticated&quot; %}&quot;&gt;
+{% cdn_image photo.path width=90 height=90 crop=&quot;limit&quot; type=&quot;authenticated&quot; %}</div>
                                 </div>
                             </span>
                         </div>
@@ -5786,11 +5786,11 @@
                                     When working with a collection (before_photos), this variable (photo) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">{% if before_photos %}
-&lt;div&gt;&lt;strong&gt;Before Photos&lt;/strong&gt;&lt;/div&gt;
+                                    <div class="example-code">&lt;div&gt;&lt;strong&gt;Before&lt;/strong&gt;&lt;/div&gt;
+&lt;div class=&quot;d-flex flex-row flex-wrap&quot;&gt;
 {% for photo in before_photos %}
 {% get_overlay_for_photo report photo as overlay %}
-&lt;div&gt;</div>
+&lt;div class=&quot;px-2&quot;&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -5823,7 +5823,7 @@
                                     <div class="example-code">&lt;div class=&quot;m-3&quot;&gt;
 &lt;div class=&quot;d-flex flex-row&quot;&gt;
 {% for photo in task_photos %}
-{% include &quot;webtemplates/2023-photo-tile&quot; with photo=photo class=&quot;mr-1 mt-1&quot; %}
+{% include &quot;webtemplates/2022-photo-tile&quot; with photo=photo class=&quot;mr-1 mt-1&quot; %}
 {% endfor %}</div>
                                 </div>
                             </span>
@@ -8427,11 +8427,11 @@
                                     When working with a collection (prompts), this variable (prompt) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/thead&gt;
-{% get_promptquestions_for_servicetask report servicetask as prompts %}
+                                    <div class="example-code">&lt;td colspan=&quot;999&quot; class=&quot;m-0 p-0 pl-4&quot;&gt;
+&lt;table class=&quot;table table-sm border-0&quot;&gt;
 {% for prompt in prompts %}
-&lt;tbody&gt;
-&lt;tr&gt;</div>
+{% ifchanged prompt.question.promptset.ref %}
+{% with prompt.question.promptset as promptset %}</div>
                                 </div>
                             </span>
                         </div>
@@ -8583,7 +8583,7 @@
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
                                     <div class="example-code">{% if relevant_quotes %}
-&lt;div&gt;
+&lt;strong&gt;Quote:&lt;/strong&gt;
 {% for quote in relevant_quotes %}
 &lt;a href=&quot;{{ quote.get_uuid_approval_url|absolute }}&quot; class=&quot;btn btn-link text-muted&quot;&gt;- See quote {{ quote}} ({{ quote.status }}){% if not forloop.last %}, {% endif %}&lt;/a&gt;
 {% endfor %}</div>
@@ -8767,11 +8767,11 @@
                                     When working with a collection (prompt), this variable (remark) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;!-- prompt remarks --&gt;
+                                    <div class="example-code">{% for prompt in prompts|natsort_by_key:&#x27;question.ref&#x27; %}
 {% if prompt.answer.remarks.exists %}
 {% for remark in prompt.answer.remarks.all %}
-&lt;div&gt;
-&lt;strong class=&quot;severity-{{ remark.get_severity }}&quot;&gt;&lt;/strong&gt;</div>
+&lt;div class=&quot;prompt-remark mt-2 keep-together prompt-remark-{{ remark.get_severity }}&quot;&gt;
+&lt;div class=&quot;prompt-remark-header d-flex align-items-start justify-content-between&quot;&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -9157,10 +9157,10 @@
                                     When working with a collection (line), this variable (rslt) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/td&gt;
-&lt;td class=&quot;text-right&quot;&gt;
+                                    <div class="example-code">&lt;div&gt;
+&lt;div&gt;{{ line.routineservicetype.name }}&lt;/div&gt;
 {% for rslt in line.routineserviceleveltypes.all %}
-&lt;div&gt;{{ rslt.name }}&lt;/div&gt;
+&lt;span&gt;{{ rslt.name }}{% if not forloop.last %}, {% endif %}&lt;/span&gt;
 {% endfor %}</div>
                                 </div>
                             </span>
@@ -10886,7 +10886,7 @@
                                     When working with a collection (servicetasks), this variable (servicetask) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/tr&gt;
+                                    <div class="example-code">{% regroup servicetasks|order_by_key:&quot;item.variant.id&quot; by item.variant.name as assets_by_variant %}
 {% for type, servicetasks in assets_by_variant %}
 {% for servicetask in servicetasks %}
 {% with remarks=servicetask.item.get_all_remarks %}
@@ -11130,7 +11130,7 @@
                                     When working with a collection (signatures), this variable (signature) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;div class=&quot;uptick-title&quot;&gt;Client Signature&lt;/div&gt;
+                                    <div class="example-code">&lt;div class=&quot;uptick-title&quot;&gt;Signatures&lt;/div&gt;
 &lt;div class=&quot;d-flex flex-row m-1&quot;&gt;
 {% for signature in signatures %}
 &lt;div class=&quot;d-flex flex-column uptick-signature justify-content-center align-items-center&quot;&gt;
@@ -11911,8 +11911,8 @@
                                     <div class="example-code">&lt;/thead&gt;
 &lt;tbody&gt;
 {% for tasksession in labour_sessions %}
-&lt;tr&gt;
-&lt;td&gt;{{ tasksession.technician }}&lt;/td&gt;</div>
+{% for technician in maintenance_technicians %}
+&lt;tr&gt;</div>
                                 </div>
                             </span>
                         </div>
