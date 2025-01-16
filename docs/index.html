@@ -241,7 +241,7 @@
                                     When working with a collection (technician), this variable (accreditation) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;td&gt;{{ task.status_changed_inspected }}&lt;/td&gt;
+                                    <div class="example-code">&lt;/td&gt;
 &lt;td&gt;
 {% for accreditation in technician.accreditations %}
 &lt;div&gt;{{accreditation.name}}: {{ accreditation.number }}&lt;/div&gt;
@@ -406,6 +406,32 @@
 <li><a href="https://thorfire.onuptick.com/configuration/templates" target="_blank">Main Report (no remarks & signoff)</a></li>
 </ul>
 </details>
+</details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>name</code></td><td>{{ accreditation.name }}</td></tr>
+<tr><td><code>number</code></td><td>{{ accreditation.number }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:iA&#x27;|default:&quot;(still in progress)&quot; }}&lt;/td&gt;
+&lt;td&gt;
+{% for accreditation in tasksession.technician.accreditations %}
+&lt;div&gt;{{accreditation.name}}: {{ accreditation.number }}&lt;/div&gt;
+{% endfor %}
+</code></pre>
+<hr>
+<pre><code class="language-django">
+{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:iA&#x27;|default:&quot;(still in progress)&quot; }}&lt;/td&gt;
+&lt;td&gt;
+{% for accreditation in tasksession.technician.accreditations %}
+&lt;div&gt;{{accreditation.name}}: {{ accreditation.number }}&lt;/div&gt;
+{% endfor %}
+</code></pre>
 </details>
 <hr>
 <h2 id="after-photos">after_photos</h2>
@@ -2329,12 +2355,29 @@
 </details>
 </details>
 <details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>files.0.preview_url</code></td><td>{{ entry.files.0.preview_url }}</td></tr>
+<tr><td><code>logbook.name</code></td><td>{{ entry.logbook.name|default:&#x27;-&#x27; }}</td></tr>
+<tr><td><code>url</code></td><td>{{ entry.url }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
+{% include &quot;reports/library/paper-logbook-icon.svg&quot; %}
+&lt;/div&gt;
 &lt;div class=&quot;...&quot;&gt;
+&lt;a href=&quot;{{ entry.files.0.preview_url }}&quot;&gt;
 &lt;strong&gt;{{ entry.logbook.name|default:&#x27;-&#x27; }}&lt;/strong&gt;
-{% for file in entry.files %}
-&lt;a class=&quot;...&quot; href=&quot;{{ file.preview_url }}&quot;&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;/div&gt;
+&lt;div class=&quot;...&quot;&gt;
+&lt;a href=&quot;{{ entry.files.0.preview_url }}&quot;&gt;
+&lt;strong&gt;{{ entry.logbook.name|default:&#x27;-&#x27; }}&lt;/strong&gt;
 {% include &quot;reports/library/arrow-up-right-from-square-icon.svg&quot; with width=&quot;...&quot; height=&quot;...&quot; %}
 </code></pre>
 </details>
@@ -2449,6 +2492,23 @@
 <li><a href="https://safelincs.onuptick.com/configuration/templates" target="_blank">P50</a></li>
 </ul>
 </details>
+</details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>preview_url</code></td><td>{{ file.preview_url }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;div class=&quot;...&quot;&gt;
+&lt;strong&gt;{{ entry.logbook.name|default:&#x27;-&#x27; }}&lt;/strong&gt;
+{% for file in entry.files %}
+&lt;a class=&quot;...&quot; href=&quot;{{ file.preview_url }}&quot;&gt;
+{% include &quot;reports/library/arrow-up-right-from-square-icon.svg&quot; with width=&quot;...&quot; height=&quot;...&quot; %}
+</code></pre>
 </details>
 <hr>
 <h2 id="fixedlineitems">fixedlineitems</h2>
@@ -2783,6 +2843,23 @@
 </ul>
 </details>
 </details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>render</code></td><td>{{ form_response.render|safe }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+{% load dynamicforms_helpers %}
+{% get_form_responses task=task as form_responses %}
+{% for form_response in form_responses %}
+{{ form_response.render|safe }}
+{% endfor %}
+</code></pre>
+</details>
 <hr>
 <h2 id="form-responses">form_responses</h2>
 <details class="expandable-section">
@@ -2858,6 +2935,13 @@
 </details>
 </details>
 <details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>description</code></td><td>{{ item.description }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
 &lt;td&gt;
@@ -2868,10 +2952,10 @@
 </code></pre>
 <hr>
 <pre><code class="language-django">
+&lt;td&gt;{{ product }}&lt;/td&gt;
 &lt;td&gt;
-&lt;ul class=&quot;...&quot;&gt;
-{% for remark in item.get_all_remarks %}
-&lt;li&gt;{{ remark }}&lt;/li&gt;
+{% for item in items %}
+{{ item.description }}{% if not forloop.last %}, {% endif %}
 {% endfor %}
 </code></pre>
 </details>
@@ -3118,7 +3202,7 @@
                                     <div class="example-code">&lt;/thead&gt;
 &lt;tbody&gt;
 {% for line in productlineitems %}
-{% if line.unit_price != 0 %}
+{% if line.subtotal &gt; 0 %}
 &lt;tr class=&quot;keep-together&quot;&gt;</div>
                                 </div>
                             </span>
@@ -3153,7 +3237,7 @@
 &lt;tbody&gt;
 {% for line in doandchargelineitems %}
 &lt;tr class=&quot;keep-together&quot;&gt;
-&lt;td&gt;</div>
+&lt;td class=&quot;px-2&quot;&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -3166,10 +3250,10 @@
                                     When working with a collection (servicelineitems), this variable (line) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/td&gt;
-&lt;/tr&gt;
+                                    <div class="example-code">&lt;/thead&gt;
+&lt;tbody&gt;
 {% for line in servicelineitems %}
-{% if line.routineservicetype and line.billingcontract_type == &quot;F&quot; %}
+{% if line.service %}
 &lt;tr class=&quot;keep-together&quot;&gt;</div>
                                 </div>
                             </span>
@@ -3187,7 +3271,7 @@
 &lt;tbody&gt;
 {% for line in lineitems %}
 &lt;tr&gt;
-&lt;td&gt;{{ line.description }}&lt;/td&gt;</div>
+&lt;td&gt;{{ line.description|markdowner }}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -4246,13 +4330,45 @@
 </details>
 </details>
 <details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>annual_subtotal</code></td><td>{{ line.annual_subtotal|currency }}</td></tr>
+<tr><td><code>description</code></td><td>{{ line.description|default:&#x27;-&#x27; |markdowner }}</td></tr>
+<tr><td><code>fixed_price</code></td><td>{{ line.fixed_price|currency }}</td></tr>
+<tr><td><code>gst</code></td><td>{{ line.gst|currency }}</td></tr>
+<tr><td><code>product</code></td><td>{{ line.product }}</td></tr>
+<tr><td><code>product.category</code></td><td>{{ line.product.category }}</td></tr>
+<tr><td><code>product.code</code></td><td>{{ line.product.code }}</td></tr>
+<tr><td><code>product.extra_fields.unit_of_measure</code></td><td>{{ line.product.extra_fields.unit_of_measure }}</td></tr>
+<tr><td><code>product.name</code></td><td>{{ line.product.name|markdowner }}</td></tr>
+<tr><td><code>product.sku</code></td><td>{{ line.product.sku }}</td></tr>
+<tr><td><code>product.subcategory</code></td><td>{{ line.product.subcategory|upper }}</td></tr>
+<tr><td><code>quantit</code></td><td>{{ line.quantit|floatformat:2 }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:0 }}</td></tr>
+<tr><td><code>routineservicetype.name</code></td><td>{{ line.routineservicetype.name }}</td></tr>
+<tr><td><code>service</code></td><td>{{ line.service }}</td></tr>
+<tr><td><code>subtotal</code></td><td>{{ line.subtotal|currency }}</td></tr>
+<tr><td><code>supplier_ref</code></td><td>{{ line.supplier_ref }}</td></tr>
+<tr><td><code>unit_price</code></td><td>{{ line.unit_price|currency }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-&lt;td&gt;&lt;div class=&quot;...&quot;&gt;{{ line.description|default:&#x27;-&#x27; }}&lt;/div&gt;&lt;/td&gt;
-{%comment%}&lt;div class=&quot;...&quot;&gt; {{ line.routineservicetype.name }}&lt;/div&gt;{%endcomment%}
-&lt;td&gt;{% for rslt in line.routineserviceleveltypes.all %}
-&lt;span&gt;{{ rslt.name }}{% if not forloop.last %},{% endif %}&lt;/span&gt;
-{% endfor %}&lt;/td&gt;
+{% for line in lineitems %}
+&lt;tr&gt;
+&lt;td&gt;{{ line.product.code }}&lt;/td&gt;
+&lt;td&gt;{{ line.product.name }}&lt;/td&gt;
+&lt;td class=&quot;...&quot;&gt;{{ line.quantity|floatformat:-2 }}&lt;/td&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;tr class=&quot;...&quot;&gt;
+&lt;td&gt;
+&lt;div&gt;{{ line.product.name }}&lt;/div&gt;
+&lt;div class=&quot;...&quot;&gt;{{ line.description|default:&#x27;-&#x27; |markdowner }}&lt;/div&gt;
+&lt;/td&gt;
 </code></pre>
 </details>
 <hr>
@@ -4448,6 +4564,41 @@
 </ul>
 </details>
 </details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>description</code></td><td>{{ lineitem.description }}</td></tr>
+<tr><td><code>gst</code></td><td>{{ lineitem.gst|currency }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:&quot;-2&quot; }}</td></tr>
+<tr><td><code>remark.created</code></td><td>{{ lineitem.remark.created|dayssince:quote.created }}</td></tr>
+<tr><td><code>remark.get_description</code></td><td>{{ lineitem.remark.get_description }}</td></tr>
+<tr><td><code>remark.get_public_url</code></td><td>{{ lineitem.remark.get_public_url }}</td></tr>
+<tr><td><code>remark.get_severity_display</code></td><td>{{ lineitem.remark.get_severity_display }}</td></tr>
+<tr><td><code>remark.ref</code></td><td>{{ lineitem.remark.ref }}</td></tr>
+<tr><td><code>subtotal</code></td><td>{{ lineitem.subtotal|currency }}</td></tr>
+<tr><td><code>total</code></td><td>{{ lineitem.total|currency }}</td></tr>
+<tr><td><code>unit_price</code></td><td>{{ lineitem.unit_price|currency }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;/thead&gt;
+&lt;tbody class=&quot;...&quot;&gt;
+{% for lineitem in lineitem_group.lineitems %}
+&lt;tr&gt;
+&lt;td&gt;{{ lineitem.description|markdowner }}&lt;/td&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+{% for lineitem in lineitem_group.lineitems %}
+&lt;tr&gt;
+&lt;td&gt;{{ lineitem.description|markdowner }}&lt;/td&gt;
+&lt;td class=&quot;...&quot;&gt;{{ lineitem.quantity|floatformat:2 }}&lt;/td&gt;
+&lt;td class=&quot;...&quot;&gt;{{ lineitem.unit_price|currency }}&lt;/td&gt;
+</code></pre>
+</details>
 <hr>
 <h2 id="lineitem-group">lineitem_group</h2>
 
@@ -4459,11 +4610,11 @@
                                     When working with a collection (consolidated_tasks), this variable (lineitem_group) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;section class=&quot;mb-0&quot;&gt;
-{% consolidated_invoice_summary invoice as consolidated_tasks %}
+                                    <div class="example-code">&lt;/thead&gt;
+&lt;tbody class=&quot;table-striped table-bordered&quot;&gt;
 {% for lineitem_group in consolidated_tasks %}
 {% if lineitem_group.task %}
-&lt;dl&gt;</div>
+&lt;tr&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -4489,13 +4640,40 @@
 </details>
 </details>
 <details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>cost_summary.subtotal</code></td><td>{{ lineitem_group.cost_summary.subtotal|currency }}</td></tr>
+<tr><td><code>cost_summary.total</code></td><td>{{ lineitem_group.cost_summary.total|currency }}</td></tr>
+<tr><td><code>property.address</code></td><td>{{ lineitem_group.property.address }}</td></tr>
+<tr><td><code>property.client_ref</code></td><td>{{ lineitem_group.property.client_ref }}</td></tr>
+<tr><td><code>property.name</code></td><td>{{ lineitem_group.property.name }}</td></tr>
+<tr><td><code>property.ref</code></td><td>{{ lineitem_group.property.ref }}</td></tr>
+<tr><td><code>task.address</code></td><td>{{ lineitem_group.task.address }}</td></tr>
+<tr><td><code>task.authorisation_ref</code></td><td>{{ lineitem_group.task.authorisation_ref }}</td></tr>
+<tr><td><code>task.description</code></td><td>{{ lineitem_group.task.description|markdowner }}</td></tr>
+<tr><td><code>task.invoice_note</code></td><td>{{ lineitem_group.task.invoice_note|markdowner }}</td></tr>
+<tr><td><code>task.ref</code></td><td>{{ lineitem_group.task.ref }}</td></tr>
+<tr><td><code>task.scope_of_works</code></td><td>{{ lineitem_group.task.scope_of_works|markdowner }}</td></tr>
+<tr><td><code>task.status_changed_inspected</code></td><td>{{ lineitem_group.task.status_changed_inspected }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-&lt;/thead&gt;
-&lt;tbody class=&quot;...&quot;&gt;
-{% for lineitem in lineitem_group.lineitems %}
-&lt;tr&gt;
-&lt;td&gt;{{ lineitem.description|markdowner }}&lt;/td&gt;
+&lt;div class=&quot;...&quot;&gt;
+&lt;dt class=&quot;...&quot;&gt;Property: &lt;/dt&gt;
+{% if lineitem_group.property %}
+&lt;dd class=&quot;...&quot;&gt;{{ lineitem_group.property.ref }} {{ lineitem_group.property.name }} {% if lineitem_group.property.client_ref %}({{ lineitem_group.property.client_ref}}){% endif %}&lt;/dd&gt;
+&lt;/div&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;dt class=&quot;...&quot;&gt;Property: &lt;/dt&gt;
+{% if lineitem_group.property %}
+&lt;dd class=&quot;...&quot;&gt;{{ lineitem_group.property.ref }} {{ lineitem_group.property.name }} {% if lineitem_group.property.client_ref %}({{ lineitem_group.property.client_ref}}){% endif %}&lt;/dd&gt;
+&lt;/div&gt;
+&lt;div class=&quot;...&quot;&gt;
 </code></pre>
 </details>
 <hr>
@@ -5081,6 +5259,16 @@
 <li><a href="https://yourchoice.onuptick.com/configuration/templates" target="_blank">Purchase Order</a></li>
 </ul>
 </details>
+</details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>description</code></td><td>{{ lineitems.description }}</td></tr>
+<tr><td><code>product</code></td><td>{{ lineitems.product }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ lineitems.quantity|floatformat:0 }}</td></tr>
+<tr><td><code>unit_price</code></td><td>{{ lineitems.unit_price|currency }}</td></tr>
+</table>
 </details>
 <details class="expandable-section">
 <summary>Usage Examples</summary>
@@ -5769,11 +5957,11 @@
                                     When working with a collection (photos), this variable (photo) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">{% if photos %}
-&lt;span class=&quot;d-block photo-row my-1&quot;&gt;
+                                    <div class="example-code">{% get_before_photos_for_remark report remark as photos %}
+{% if photos %}
 {% for photo in photos %}
-&lt;a href=&quot;{% cdn_image_url photo.path type=&quot;authenticated&quot; %}&quot;&gt;
-{% cdn_image photo.path width=90 height=90 crop=&quot;limit&quot; type=&quot;authenticated&quot; %}</div>
+{% get_overlay_for_photo report photo as overlay %}
+&lt;div class=&quot;d-inline-block&quot;&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -5786,11 +5974,11 @@
                                     When working with a collection (before_photos), this variable (photo) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;div&gt;&lt;strong&gt;Before&lt;/strong&gt;&lt;/div&gt;
+                                    <div class="example-code">{% endif %}
 &lt;div class=&quot;d-flex flex-row flex-wrap&quot;&gt;
 {% for photo in before_photos %}
-{% get_overlay_for_photo report photo as overlay %}
-&lt;div class=&quot;px-2&quot;&gt;</div>
+{% include &quot;webtemplates/2022-photo-tile&quot; with photo=photo class=&quot;mr-1 mt-1&quot; %}
+{% endfor %}</div>
                                 </div>
                             </span>
                         </div>
@@ -5803,11 +5991,11 @@
                                     When working with a collection (after_photos), this variable (photo) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;div&gt;&lt;strong&gt;After&lt;/strong&gt;&lt;/div&gt;
+                                    <div class="example-code">&lt;strong&gt;After&lt;/strong&gt;
 &lt;div class=&quot;d-flex flex-row flex-wrap&quot;&gt;
 {% for photo in after_photos %}
-{% get_overlay_for_photo report photo as overlay %}
-&lt;div class=&quot;px-2&quot;&gt;</div>
+{% include &quot;webtemplates/2022-photo-tile&quot; with photo=photo class=&quot;mr-1 mt-1&quot; %}
+{% endfor %}</div>
                                 </div>
                             </span>
                         </div>
@@ -6690,6 +6878,23 @@
 </ul>
 </details>
 </details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>last_modified</code></td><td>{{ photo.last_modified }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;div class=&quot;...&quot;&gt;
+&lt;a href=&quot;{% cdn_image_url photo.path type=&quot;authenticated&quot; overlay=overlay width=250 height=200 color=&#x27;white&#x27; gravity=&#x27;south_west&#x27; x=20 y=20 %}&quot;&gt;
+{% cdn_image photo.path width=130 height=90 color=&#x27;white&#x27; crop=&quot;limit&quot; type=&quot;authenticated&quot;  %}
+&lt;/a&gt;
+&lt;div class=&quot;...&quot;&gt;{{ photo.last_modified }}&lt;/div&gt;
+</code></pre>
+</details>
 <hr>
 <h2 id="photos">photos</h2>
 <details class="expandable-section">
@@ -7478,6 +7683,35 @@
 <li><a href="https://englishsecurity.onuptick.com/configuration/templates" target="_blank">Purchase Order</a></li>
 </ul>
 </details>
+</details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>grouper</code></td><td>{{ product_group.grouper }}</td></tr>
+<tr><td><code>list</code></td><td>{{ product_group.list|sum_list:&quot;subtotal&quot;|currency }}</td></tr>
+<tr><td><code>list.0</code></td><td>{{ product_group.list.0|get_lineitem_tax_code }}</td></tr>
+<tr><td><code>list.0.product.sku</code></td><td>{{ product_group.list.0.product.sku }}</td></tr>
+<tr><td><code>list.0.unit_price</code></td><td>{{ product_group.list.0.unit_price|currency }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;tbody&gt;
+{% regroup lineitems|order_by_key:&quot;product.name&quot; by product.name as lineitems_by_product %}
+{% for product_group in lineitems_by_product %}
+&lt;tr&gt;
+&lt;td&gt;{{ product_group.grouper }}&lt;/td&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;tbody&gt;
+{% regroup lineitems|order_by_key:&quot;product.name&quot; by product.name as lineitems_by_product %}
+{% for product_group in lineitems_by_product %}
+&lt;tr&gt;
+&lt;td&gt;{{ product_group.grouper }}&lt;/td&gt;
+</code></pre>
 </details>
 <hr>
 <h2 id="productlineitems">productlineitems</h2>
@@ -8427,11 +8661,11 @@
                                     When working with a collection (prompts), this variable (prompt) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;td colspan=&quot;999&quot; class=&quot;m-0 p-0 pl-4&quot;&gt;
-&lt;table class=&quot;table table-sm border-0&quot;&gt;
+                                    <div class="example-code">&lt;/thead&gt;
+{% get_promptquestions_for_servicetask report servicetask as prompts %}
 {% for prompt in prompts %}
-{% ifchanged prompt.question.promptset.ref %}
-{% with prompt.question.promptset as promptset %}</div>
+&lt;tbody&gt;
+&lt;tr&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -8530,6 +8764,14 @@
 </details>
 </details>
 <details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>question.label</code></td><td>{{ prompt.question.label }}</td></tr>
+<tr><td><code>question.ref</code></td><td>{{ prompt.question.ref }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
 {% for prompt in prompts|order_by_key:&#x27;question.order&#x27; %}
@@ -8537,6 +8779,14 @@
 {% for remark in prompt.answer.remarks.all %}
 &lt;div class=&quot;...&quot;&gt;
 &lt;div class=&quot;...&quot;&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;/thead&gt;
+{% get_promptquestions_for_servicetask report servicetask as prompts %}
+{% for prompt in prompts %}
+&lt;tbody&gt;
+&lt;tr&gt;
 </code></pre>
 </details>
 <hr>
@@ -8666,6 +8916,32 @@
 <li><a href="https://testing-uk.onuptick.com/configuration/templates" target="_blank">FRA</a></li>
 </ul>
 </details>
+</details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>get_uuid_approval_url</code></td><td>{{ quote.get_uuid_approval_url|absolute }}</td></tr>
+<tr><td><code>status</code></td><td>{{ quote.status }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+{% if relevant_quotes %}
+&lt;strong&gt;Quote:&lt;/strong&gt;
+{% for quote in relevant_quotes %}
+&lt;a href=&quot;{{ quote.get_uuid_approval_url|absolute }}&quot; class=&quot;...&quot;&gt;- See quote {{ quote}} ({{ quote.status }}){% if not forloop.last %}, {% endif %}&lt;/a&gt;
+{% endfor %}
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;strong&gt;Quote:&lt;/strong&gt;
+{% for quote in relevant_quotes %}
+&lt;a href=&quot;{{ quote.get_uuid_approval_url|absolute }}&quot; class=&quot;...&quot;&gt;- See quote {{ quote}} ({{ quote.status }}){% if not forloop.last %}, {% endif %}&lt;/a&gt;
+{% endfor %}
+{% endif %}
+</code></pre>
 </details>
 <hr>
 <h2 id="relevant-quotes">relevant_quotes</h2>
@@ -8925,6 +9201,42 @@
 </ul>
 </details>
 </details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>created</code></td><td>{{ remark.created|dayssince:report.created }}</td></tr>
+<tr><td><code>get_description</code></td><td>{{ remark.get_description }}</td></tr>
+<tr><td><code>get_public_url</code></td><td>{{ remark.get_public_url }}</td></tr>
+<tr><td><code>get_resolution</code></td><td>{{ remark.get_resolution }}</td></tr>
+<tr><td><code>get_severity</code></td><td>{{ remark.get_severity }}</td></tr>
+<tr><td><code>get_severity_display</code></td><td>{{ remark.get_severity_display }}</td></tr>
+<tr><td><code>id</code></td><td>{{ remark.id }}</td></tr>
+<tr><td><code>identified</code></td><td>{{ remark.identified }}</td></tr>
+<tr><td><code>last_verified_date</code></td><td>{{ remark.last_verified_date }}</td></tr>
+<tr><td><code>location</code></td><td>{{ remark.location }}</td></tr>
+<tr><td><code>ref</code></td><td>{{ remark.ref }}</td></tr>
+<tr><td><code>severity</code></td><td>{{ remark.severity }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;div class=&quot;...&quot;&gt;
+&lt;div&gt;
+&lt;a href=&quot;#prompt-{{ prompt.question.ref|slugify }}&quot;&gt;[{{ prompt.question.ref }}]&lt;/a&gt;
+&lt;span class=&quot;...&quot;&gt;&lt;/span&gt;
+&lt;a href=&quot;{{ remark.get_public_url|absolute }}&quot; class=&quot;...&quot;&gt;&lt;u&gt;{{ remark.ref }}&lt;/u&gt;&lt;/a&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;a href=&quot;#prompt-{{ prompt.question.ref|slugify }}&quot;&gt;[{{ prompt.question.ref }}]&lt;/a&gt;
+&lt;span class=&quot;...&quot;&gt;{{ prompt.question.label }}&lt;/span&gt;
+&lt;span class=&quot;...&quot;&gt;&lt;/span&gt;
+&lt;a href=&quot;{{ remark.get_public_url|absolute }}&quot; class=&quot;...&quot;&gt;&lt;u&gt;{{ remark.ref }}&lt;/u&gt;&lt;/a&gt; 
+&lt;/div&gt;
+</code></pre>
+</details>
 <hr>
 <h2 id="report">report</h2>
 <details class="expandable-section">
@@ -9146,6 +9458,33 @@
 </ul>
 </details>
 </details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>asset</code></td><td>{{ row.asset }}</td></tr>
+<tr><td><code>count</code></td><td>{{ row.count }}</td></tr>
+<tr><td><code>service</code></td><td>{{ row.service }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;/thead&gt;
+&lt;tbody&gt;
+{% for row in maintenance_summary %}
+&lt;tr&gt;
+&lt;td&gt;{{ row.service }}&lt;/td&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;tbody&gt;
+{% for row in maintenance_summary %}
+&lt;tr&gt;
+&lt;td&gt;{{ row.service }}&lt;/td&gt;
+&lt;td&gt;{{ row.asset }}&lt;/td&gt;
+</code></pre>
+</details>
 <hr>
 <h2 id="rslt">rslt</h2>
 
@@ -9157,11 +9496,11 @@
                                     When working with a collection (line), this variable (rslt) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;div&gt;
-&lt;div&gt;{{ line.routineservicetype.name }}&lt;/div&gt;
-{% for rslt in line.routineserviceleveltypes.all %}
-&lt;span&gt;{{ rslt.name }}{% if not forloop.last %}, {% endif %}&lt;/span&gt;
-{% endfor %}</div>
+                                    <div class="example-code">&lt;td&gt;&lt;div class=&quot;text-left&quot;&gt;{{ line.description|default:&#x27;-&#x27; }}&lt;/div&gt;&lt;/td&gt;
+{%comment%}&lt;div class=&quot;text-white&quot;&gt; {{ line.routineservicetype.name }}&lt;/div&gt;{%endcomment%}
+&lt;td&gt;{% for rslt in line.routineserviceleveltypes.all %}
+&lt;span&gt;{{ rslt.name }}{% if not forloop.last %},{% endif %}&lt;/span&gt;
+{% endfor %}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -10097,6 +10436,23 @@
 </ul>
 </details>
 </details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>name</code></td><td>{{ rslt.name }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;td&gt;&lt;div class=&quot;...&quot;&gt;{{ line.description|default:&#x27;-&#x27; }}&lt;/div&gt;&lt;/td&gt;
+{%comment%}&lt;div class=&quot;...&quot;&gt; {{ line.routineservicetype.name }}&lt;/div&gt;{%endcomment%}
+&lt;td&gt;{% for rslt in line.routineserviceleveltypes.all %}
+&lt;span&gt;{{ rslt.name }}{% if not forloop.last %},{% endif %}&lt;/span&gt;
+{% endfor %}&lt;/td&gt;
+</code></pre>
+</details>
 <hr>
 <h2 id="servicelineitems">servicelineitems</h2>
 <details class="expandable-section">
@@ -10886,9 +11242,9 @@
                                     When working with a collection (servicetasks), this variable (servicetask) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">{% regroup servicetasks|order_by_key:&quot;item.variant.id&quot; by item.variant.name as assets_by_variant %}
-{% for type, servicetasks in assets_by_variant %}
-{% for servicetask in servicetasks %}
+                                    <div class="example-code">{% endif %}
+{% endfor %}
+{% comment %} {% for servicetask in servicetasks %}
 {% with remarks=servicetask.item.get_all_remarks %}
 &lt;tr&gt;</div>
                                 </div>
@@ -11001,13 +11357,35 @@
 </details>
 </details>
 <details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>get_result_display.upper</code></td><td>{{ servicetask.get_result_display.upper }}</td></tr>
+<tr><td><code>item</code></td><td>{{ servicetask.item|bsecure_badge_code }}</td></tr>
+<tr><td><code>item.get_label</code></td><td>{{ servicetask.item.get_label }}</td></tr>
+<tr><td><code>item.inspection_ref</code></td><td>{{ servicetask.item.inspection_ref }}</td></tr>
+<tr><td><code>item.location</code></td><td>{{ servicetask.item.location }}</td></tr>
+<tr><td><code>item.variant.name</code></td><td>{{ servicetask.item.variant.name|default:&quot;-&quot; }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ servicetask.quantity|floatformat:0 }}</td></tr>
+<tr><td><code>result</code></td><td>{{ servicetask.result }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-{% if servicetask.item.get_all_remarks %}
-&lt;ul class=&quot;...&quot;&gt;
-{% for remark in servicetask.item.get_all_remarks %}
-&lt;li&gt;
-&lt;span class=&quot;...&quot;&gt;
+{% for servicetask in task.servicetask_set.all %}
+&lt;tr&gt;
+&lt;td class=&quot;...&quot;&gt;{{ forloop.counter }}&lt;/td&gt;
+&lt;td&gt;{{ servicetask.item.variant.name|default:&quot;-&quot; }}&lt;/td&gt;
+&lt;td&gt;{{ servicetask.quantity|floatformat:0 }}&lt;/td&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+&lt;tr&gt;
+&lt;td class=&quot;...&quot;&gt;{{ forloop.counter }}&lt;/td&gt;
+&lt;td&gt;{{ servicetask.item.variant.name|default:&quot;-&quot; }}&lt;/td&gt;
+&lt;td&gt;{{ servicetask.quantity|floatformat:0 }}&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 </code></pre>
 </details>
 <hr>
@@ -11133,8 +11511,8 @@
                                     <div class="example-code">&lt;div class=&quot;uptick-title&quot;&gt;Signatures&lt;/div&gt;
 &lt;div class=&quot;d-flex flex-row m-1&quot;&gt;
 {% for signature in signatures %}
-&lt;div class=&quot;d-flex flex-column uptick-signature justify-content-center align-items-center&quot;&gt;
-&lt;div class=&quot;d-block&quot;&gt;{% cdn_image signature.path height=100 crop=&quot;fill&quot; type=&quot;authenticated&quot; %}&lt;/div&gt;</div>
+&lt;div class=&quot;primary-tech mb-3&quot;&gt;
+{% if report.technician %}</div>
                                 </div>
                             </span>
                         </div>
@@ -11345,6 +11723,23 @@
 <li><a href="https://thorfire.onuptick.com/configuration/templates" target="_blank">Test Jordan</a></li>
 </ul>
 </details>
+</details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>filename</code></td><td>{{ signature.filename }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+{% for signature in signatures %}
+&lt;div class=&quot;...&quot;&gt;
+&lt;div class=&quot;...&quot;&gt;{% cdn_image signature.path height=100 crop=&quot;fill&quot; type=&quot;authenticated&quot; %}&lt;/div&gt;
+&lt;div class=&quot;...&quot;&gt;{{ signature.filename }}&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 </details>
 <hr>
 <h2 id="signatures">signatures</h2>
@@ -11593,6 +11988,23 @@
 <li><a href="https://thorfire.onuptick.com/configuration/templates" target="_blank">Flow Test Report - Hydrants</a></li>
 </ul>
 </details>
+</details>
+<details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>product</code></td><td>{{ st.product }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
+<summary>Usage Examples</summary>
+<pre><code class="language-django">
+&lt;strong&gt;Materials used&lt;/strong&gt;
+&lt;ul class=&quot;...&quot;&gt;
+{% for st in stproducts %}
+&lt;li&gt;{{ st.product }}&lt;/li&gt;
+{% endfor %}
+</code></pre>
 </details>
 <hr>
 <h2 id="stproducts">stproducts</h2>
@@ -11911,8 +12323,8 @@
                                     <div class="example-code">&lt;/thead&gt;
 &lt;tbody&gt;
 {% for tasksession in labour_sessions %}
-{% for technician in maintenance_technicians %}
-&lt;tr&gt;</div>
+&lt;tr&gt;
+&lt;td&gt;{{ tasksession.technician }}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -12113,13 +12525,32 @@
 </details>
 </details>
 <details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>finished</code></td><td>{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:iA&#x27;|default:&quot;(still in progress)&quot; }}</td></tr>
+<tr><td><code>get_duration</code></td><td>{{ tasksession.get_duration|duration }}</td></tr>
+<tr><td><code>get_type_display</code></td><td>{{ tasksession.get_type_display }}</td></tr>
+<tr><td><code>started</code></td><td>{{ tasksession.started|timezone:tasksession.timezone|date:&#x27;d/m/Y H:i&#x27; }}</td></tr>
+<tr><td><code>technician</code></td><td>{{ tasksession.technician }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:iA&#x27;|default:&quot;(still in progress)&quot; }}&lt;/td&gt;
-&lt;td&gt;
-{% for accreditation in tasksession.technician.accreditations %}
-&lt;div&gt;{{accreditation.name}}: {{ accreditation.number }}&lt;/div&gt;
-{% endfor %}
+&lt;/thead&gt;
+&lt;tbody&gt;
+{% for tasksession in labour_sessions %}
+&lt;tr&gt;
+&lt;td&gt;{{ tasksession.get_type_display }}&lt;/td&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+{% for tasksession in labour_sessions %}
+&lt;tr&gt;
+&lt;td&gt;{{ tasksession.get_type_display }}&lt;/td&gt;
+&lt;td&gt;{{ tasksession.technician }}&lt;/td&gt;
+&lt;td&gt;{{ tasksession.started|timezone:tasksession.timezone|date:&#x27;d/m/Y H:i&#x27; }} -
 </code></pre>
 </details>
 <hr>
@@ -12133,8 +12564,8 @@
                                     When working with a collection (maintenance_technicians), this variable (technician) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/thead&gt;
-&lt;tbody&gt;
+                                    <div class="example-code">&lt;tbody&gt;
+{% for tasksession in labour_sessions %}
 {% for technician in maintenance_technicians %}
 &lt;tr&gt;
 &lt;td&gt;{{ technician.name }}&lt;/td&gt;</div>
@@ -12347,13 +12778,29 @@
 </details>
 </details>
 <details class="expandable-section">
+<summary>Attributes</summary>
+<table>
+<tr><th>Attribute</th><th>Example Usage</th></tr>
+<tr><td><code>inspected_date</code></td><td>{{ technician.inspected_date }}</td></tr>
+<tr><td><code>name</code></td><td>{{ technician.name }}</td></tr>
+</table>
+</details>
+<details class="expandable-section">
 <summary>Usage Examples</summary>
 <pre><code class="language-django">
-{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:i&#x27;|default:&quot;(still in progress)&quot; }}&lt;/td&gt;
-&lt;td&gt;
-{% for accreditation in technician.accreditations %}
-&lt;div&gt;{{accreditation.name}}: {{ accreditation.number }}&lt;/div&gt;
-{% endfor %}
+{% comment %}
+{% for technician in task.supporting_technicians.all %}
+{% ifchanged technician.name %}
+&lt;div class=&quot;...&quot;&gt;Performed by {{ technician.name }}&lt;/div&gt;
+&lt;div&gt;{% render_signature_on_file technician class_name=&#x27;signature-on-file&#x27; %}&lt;/div&gt;
+</code></pre>
+<hr>
+<pre><code class="language-django">
+{% for technician in maintenance_technicians %}
+&lt;tr&gt;
+&lt;td&gt;{{ technician.name }}&lt;/td&gt;
+{% comment %} &lt;td&gt;{{ technician.inspected_date }}&lt;/td&gt; {% endcomment %}
+&lt;td width=&quot;...&quot;&gt;{{ tasksession.started|timezone:tasksession.timezone|date:&#x27;d/m/Y H:i&#x27; }} -
 </code></pre>
 </details>
 <hr>
