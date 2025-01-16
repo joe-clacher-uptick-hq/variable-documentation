@@ -296,7 +296,7 @@
                                     When working with a collection (technician), this variable (accreditation) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/td&gt;
+                                    <div class="example-code">&lt;td&gt;{{ technician.inspected_date|date:&quot;jS F Y&quot; }}&lt;/td&gt;
 &lt;td&gt;
 {% for accreditation in technician.accreditations %}
 &lt;div&gt;{{accreditation.name}}: {{ accreditation.number }}&lt;/div&gt;
@@ -1346,11 +1346,11 @@
                                     When working with a collection (report), this variable (bc) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;p&gt;&lt;strong&gt;Property Address&lt;/strong&gt;: {{ report.property.name }}&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Building/s or part of building&lt;/strong&gt;: {{ report.property.building_part|default:&quot;This report is for the whole building&quot; }}&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Classification of building/s or part of building&lt;/strong&gt;: This Annual Safety Measures Report is in relation to WA. A {% for bc in report.property.building_classes %}{{ bc }}{% if not forloop.last %}, {% endif %}{% empty %}{{ report.property.building_class|default:&quot;(unspecified class)&quot; }}{% endfor %} as defined under BCA Volume 1 Part A3.2 of the National Construction Code (NCC).&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;
-&lt;div&gt;&lt;strong&gt;Maintenance personnel details&lt;/strong&gt;&lt;/div&gt;</div>
+                                    <div class="example-code">&lt;tr&gt;
+&lt;th&gt;Class of Building:&lt;/th&gt;
+&lt;td&gt;{% for bc in report.property.building_classes %}{{ bc }}{% if not forloop.last %}, {% endif %}{% empty %}{{ report.property.building_class }}{% endfor %}&lt;/td&gt;
+&lt;th&gt;Building Era:&lt;/th&gt;
+&lt;td&gt;{{ property.building_era }}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -2097,13 +2097,13 @@
 <summary>Attributes</summary>
 <table>
 <tr><th>Attribute</th><th>Example Usage</th></tr>
-<tr><td><code>address</code></td><td>{{ client.address|markdowner }}</td></tr>
+<tr><td><code>address</code></td><td>{{ client.address|default:&quot;&quot; }}</td></tr>
 <tr><td><code>billingcard.postal_address</code></td><td>{{ client.billingcard.postal_address|markdowner }}</td></tr>
 <tr><td><code>billingcard.site_address</code></td><td>{{ client.billingcard.site_address|markdowner }}</td></tr>
 <tr><td><code>contact_email</code></td><td>{{ client.contact_email|default:&quot;&quot; }}</td></tr>
 <tr><td><code>contact_phone_bh</code></td><td>{{ client.contact_phone_bh|default:&quot;&quot; }}</td></tr>
 <tr><td><code>name</code></td><td>{{ client.name|markdowner }}</td></tr>
-<tr><td><code>primary_contact.name</code></td><td>{{ client.primary_contact.name|default:&quot;&quot; }}</td></tr>
+<tr><td><code>primary_contact.name</code></td><td>{{ client.primary_contact.name|upper }}</td></tr>
 <tr><td><code>quoting_attention</code></td><td>{{ client.quoting_attention }}</td></tr>
 <tr><td><code>quoting_email_to</code></td><td>{{ client.quoting_email_to }}</td></tr>
 </table>
@@ -3046,7 +3046,7 @@
 <tr><td><code>COMPANY_LICENSES</code></td><td>{{ config.COMPANY_LICENSES|markdowner }}</td></tr>
 <tr><td><code>CONTACT_ADDRESS</code></td><td>{{ config.CONTACT_ADDRESS|markdowner }}</td></tr>
 <tr><td><code>CONTACT_WEBSITE</code></td><td>{{ config.CONTACT_WEBSITE }}</td></tr>
-<tr><td><code>INVOICE_PAYMENT_INSTRUCTIONS</code></td><td>{{ config.INVOICE_PAYMENT_INSTRUCTIONS|markdowner }}</td></tr>
+<tr><td><code>INVOICE_PAYMENT_INSTRUCTIONS</code></td><td>{{ config.INVOICE_PAYMENT_INSTRUCTIONS|default:&quot;Metro Bank &lt;br&gt; Sort Code: 23-05-80 &lt;br&gt; Account Number: 32422454  &lt;br&gt; Please pay invoice by the due date &lt;br&gt; accounts@fisk.group&quot;}}</td></tr>
 <tr><td><code>SERVICEQUOTE_TEMPLATE_TERMS_AND_CONDITIONS</code></td><td>{{ config.SERVICEQUOTE_TEMPLATE_TERMS_AND_CONDITIONS|markdowner }}</td></tr>
 </table>
 </details>
@@ -6323,7 +6323,7 @@
                                     When working with a collection (form_responses), this variable (form_response) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">{% block content %}
+                                    <div class="example-code">{% if task %}
 {% get_form_responses task=task as form_responses %}
 {% for form_response in form_responses %}
 {{ form_response.render|safe }}
@@ -6796,27 +6796,27 @@
 <table>
 <tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>billingcard.name</code></td><td>{{ invoice.billingcard.name|slice:&quot;5:&quot; }}</td></tr>
-<tr><td><code>billingcard.postal_address</code></td><td>{{ invoice.billingcard.postal_address|linebreaksbr }}</td></tr>
+<tr><td><code>billingcard.postal_address</code></td><td>{{ invoice.billingcard.postal_address|markdowner }}</td></tr>
 <tr><td><code>billingcard.ref</code></td><td>{{ invoice.billingcard.ref }}</td></tr>
-<tr><td><code>billingcard.site_address</code></td><td>{{ invoice.billingcard.site_address }}</td></tr>
+<tr><td><code>billingcard.site_address</code></td><td>{{ invoice.billingcard.site_address|linebreaksbr }}</td></tr>
 <tr><td><code>client</code></td><td>{{ invoice.client }}</td></tr>
-<tr><td><code>client.address</code></td><td>{{ invoice.client.address|markdowner }}</td></tr>
+<tr><td><code>client.address</code></td><td>{{ invoice.client.address|linebreaks }}</td></tr>
 <tr><td><code>client.contact_address</code></td><td>{{ invoice.client.contact_address|linebreaksbr }}</td></tr>
 <tr><td><code>client.ref</code></td><td>{{ invoice.client.ref }}</td></tr>
 <tr><td><code>credit_total</code></td><td>{{ invoice.credit_total|currency }}</td></tr>
 <tr><td><code>creditnote_set.first.number</code></td><td>{{ invoice.creditnote_set.first.number|default:&quot;-&quot; }}</td></tr>
-<tr><td><code>date</code></td><td>{{ invoice.date|date:&quot;d/m/Y&quot; }}</td></tr>
-<tr><td><code>description</code></td><td>{{ invoice.description }}</td></tr>
-<tr><td><code>due_date</code></td><td>{{ invoice.due_date|date:&quot;d/m/Y&quot; }}</td></tr>
+<tr><td><code>date</code></td><td>{{ invoice.date|date:&quot;jS F Y&quot;|default:&quot;-&quot; }}</td></tr>
+<tr><td><code>description</code></td><td>{{ invoice.description|markdowner }}</td></tr>
+<tr><td><code>due_date</code></td><td>{{ invoice.due_date|date:&quot;jS F Y&quot;|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>extra_fields.invoice_care_of</code></td><td>{{ invoice.extra_fields.invoice_care_of|default:&quot;As Per Above&quot; }}</td></tr>
 <tr><td><code>get_extra_fields_display.different_invoice_address</code></td><td>{{ invoice.get_extra_fields_display.different_invoice_address|linebreaksbr }}</td></tr>
-<tr><td><code>gst</code></td><td>{{ invoice.gst|currency }}</td></tr>
-<tr><td><code>number</code></td><td>{{ invoice.number|default:&quot;&quot; }}</td></tr>
-<tr><td><code>property.address</code></td><td>{{ invoice.property.address|linebreaks }}</td></tr>
+<tr><td><code>gst</code></td><td>{{ invoice.gst|floatformat:2 }}</td></tr>
+<tr><td><code>number</code></td><td>{{ invoice.number|default:&quot;-&quot; }}</td></tr>
+<tr><td><code>property.address</code></td><td>{{ invoice.property.address|markdowner }}</td></tr>
 <tr><td><code>property.name</code></td><td>{{ invoice.property.name }}</td></tr>
 <tr><td><code>property.postal_address</code></td><td>{{ invoice.property.postal_address|linebreaksbr }}</td></tr>
-<tr><td><code>ref</code></td><td>{{ invoice.ref }}</td></tr>
-<tr><td><code>subtotal</code></td><td>{{ invoice.subtotal|inverse_percent:project.retention_rate|multiply:project.retention_rate|currency }}</td></tr>
+<tr><td><code>ref</code></td><td>{{ invoice.ref|default:&quot;-&quot;}}</td></tr>
+<tr><td><code>subtotal</code></td><td>{{ invoice.subtotal|floatformat:2 }}</td></tr>
 <tr><td><code>task.address</code></td><td>{{ invoice.task.address|linebreaksbr }}</td></tr>
 <tr><td><code>task.authorisation_ref</code></td><td>{{ invoice.task.authorisation_ref|default:&quot;Not Provided&quot;}}</td></tr>
 <tr><td><code>task.created</code></td><td>{{ invoice.task.created|date:&quot;Y-m-d&quot; }}</td></tr>
@@ -6824,11 +6824,11 @@
 <tr><td><code>task.extra_fields.task_id</code></td><td>{{ invoice.task.extra_fields.task_id|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>task.property</code></td><td>{{ invoice.task.property|linebreaksbr }}</td></tr>
 <tr><td><code>task.property.address.display</code></td><td>{{ invoice.task.property.address.display|linebreaksbr }}</td></tr>
-<tr><td><code>task.ref</code></td><td>{{ invoice.task.ref|default:&quot;_&quot; }}</td></tr>
+<tr><td><code>task.ref</code></td><td>{{ invoice.task.ref }}</td></tr>
 <tr><td><code>task.scope_of_works</code></td><td>{{ invoice.task.scope_of_works|markdowner }}</td></tr>
 <tr><td><code>task.source_service_quote.ref</code></td><td>{{ invoice.task.source_service_quote.ref|default:&quot;-&quot; }}</td></tr>
-<tr><td><code>task.status_changed_inspected</code></td><td>{{ invoice.task.status_changed_inspected|date:&quot;jS F Y&quot; }}</td></tr>
-<tr><td><code>total</code></td><td>{{ invoice.total|floatformat:2 }}</td></tr>
+<tr><td><code>task.status_changed_inspected</code></td><td>{{ invoice.task.status_changed_inspected|date:&quot;jS F Y H:iA&quot; }}</td></tr>
+<tr><td><code>total</code></td><td>{{ invoice.total|currency }}</td></tr>
 <tr><td><code>total_after_credits</code></td><td>{{ invoice.total_after_credits|currency }}</td></tr>
 </table>
 </details>
@@ -6894,11 +6894,11 @@
                                     When working with a collection (items), this variable (item) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">{% regroup report.get_items|order_by_key:&#x27;type.name&#x27; by type as items_by_type %}
-{% for type, items in items_by_type  %}
+                                    <div class="example-code">&lt;td width=&quot;200&quot;&gt;&lt;strong&gt;Standard of Performance:&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
 {% for item in items %}
-{% ifchanged item.label %}
-&lt;tr&gt;</div>
+{% ifchanged item.get_standard_performance %}
+&lt;div&gt;{{ item.get_standard_performance }}&lt;/div&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -7054,7 +7054,7 @@
 <tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>compliant</code></td><td>{{ item.compliant|yesno:&quot;✔,✘,WARNING&quot; }}</td></tr>
 <tr><td><code>contractor.address</code></td><td>{{ item.contractor.address|default:&quot;N/A&quot; }}</td></tr>
-<tr><td><code>description</code></td><td>{{ item.description }}</td></tr>
+<tr><td><code>description</code></td><td>{{ item.description|default:&#x27;-&#x27; }}</td></tr>
 <tr><td><code>extra_fields.installed_date</code></td><td>{{ item.extra_fields.installed_date|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>extra_fields.ip_address</code></td><td>{{ item.extra_fields.ip_address|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>extra_fields.mac_address</code></td><td>{{ item.extra_fields.mac_address|default:&quot;-&quot; }}</td></tr>
@@ -7068,7 +7068,7 @@
 <tr><td><code>quantity</code></td><td>{{ item.quantity|floatformat:2 }}</td></tr>
 <tr><td><code>standard</code></td><td>{{ item.standard|default:item.type.standard|default:&quot;N/A&quot; }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ item.subtotal|currency }}</td></tr>
-<tr><td><code>type.extra_fields.compliant_description</code></td><td>{{ item.type.extra_fields.compliant_description|default:&quot;System verified against performance requirments&quot; }}</td></tr>
+<tr><td><code>type.extra_fields.compliant_description</code></td><td>{{ item.type.extra_fields.compliant_description|default:&quot;System verified against performance requirments &quot; }}</td></tr>
 <tr><td><code>type.extra_fields.compliant_resolution</code></td><td>{{ item.type.extra_fields.compliant_resolution|default:&quot;No issues observed at the time of inspection - No further action required&quot; }}</td></tr>
 <tr><td><code>unit_price</code></td><td>{{ item.unit_price|currency }}</td></tr>
 </table>
@@ -7712,11 +7712,11 @@
                                     When working with a collection (productlineitems), this variable (line) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;td class=&quot;font-weight-bold text-center&quot; width=&quot;12%&quot;&gt;TOTAL £ &lt;/td&gt;
-&lt;/tr&gt;
+                                    <div class="example-code">&lt;/thead&gt;
+&lt;tbody&gt;
 {% for line in productlineitems %}
-&lt;tr&gt;
-&lt;td class=&quot;bg-gray&quot;&gt;&lt;strong&gt;{{ line.product.category|upper }}&lt;/strong&gt;&lt;/td&gt;</div>
+&lt;tr class=&quot;keep-together&quot;&gt;
+{%comment%}&lt;td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -7750,7 +7750,7 @@
 &lt;tbody&gt;
 {% for line in doandchargelineitems %}
 &lt;tr class=&quot;keep-together&quot;&gt;
-&lt;td class=&quot;px-2&quot;&gt;</div>
+&lt;td&gt;{{ line.description|default:&#x27;-&#x27; }}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -7784,7 +7784,7 @@
 &lt;tbody&gt;
 {% for line in lineitems %}
 &lt;tr&gt;
-&lt;td class=&quot;text-center&quot;&gt;{{ line.quantity|floatformat:-2 }}&lt;/td&gt;</div>
+&lt;td&gt;{% if line.product.sku %}&lt;div&gt;&lt;strong&gt; ({{ line.product.sku }})&lt;/strong&gt;&lt;/div&gt;{% endif %}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -8952,14 +8952,14 @@
 <tr><td><code>gst</code></td><td>{{ line.gst|currency }}</td></tr>
 <tr><td><code>number_of_visits</code></td><td>{{ line.number_of_visits|floatformat:1 }}</td></tr>
 <tr><td><code>product</code></td><td>{{ line.product }}</td></tr>
-<tr><td><code>product.category</code></td><td>{{ line.product.category }}</td></tr>
-<tr><td><code>product.code</code></td><td>{{ line.product.code  }}</td></tr>
+<tr><td><code>product.category</code></td><td>{{ line.product.category|upper }}</td></tr>
+<tr><td><code>product.code</code></td><td>{{ line.product.code }}</td></tr>
 <tr><td><code>product.extra_fields.unit_of_measure</code></td><td>{{ line.product.extra_fields.unit_of_measure }}</td></tr>
 <tr><td><code>product.name</code></td><td>{{ line.product.name|default:&#x27;-&#x27; }}</td></tr>
-<tr><td><code>product.sku</code></td><td>{{ line.product.sku|markdowner }}</td></tr>
+<tr><td><code>product.sku</code></td><td>{{ line.product.sku }}</td></tr>
 <tr><td><code>product.subcategory</code></td><td>{{ line.product.subcategory|upper }}</td></tr>
 <tr><td><code>quantit</code></td><td>{{ line.quantit|floatformat:2 }}</td></tr>
-<tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:-2 }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ line.quantity|floatformat:2  }}</td></tr>
 <tr><td><code>routineservicetype.name</code></td><td>{{ line.routineservicetype.name }}</td></tr>
 <tr><td><code>service</code></td><td>{{ line.service }}</td></tr>
 <tr><td><code>site_price</code></td><td>{{ line.site_price|currency }}</td></tr>
@@ -9018,7 +9018,7 @@
 &lt;tbody class=&quot;table-striped table-bordered&quot;&gt;
 {% for lineitem in lineitem_group.lineitems %}
 &lt;tr&gt;
-&lt;td&gt;{{ lineitem.description|markdowner|default:lineitem.product.description }}&lt;/td&gt;</div>
+&lt;td&gt;{{ lineitem.product|markdowner }}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -10075,17 +10075,17 @@
 <tr><td><code>annual_subtotal</code></td><td>{{ lineitem.annual_subtotal|currency }}</td></tr>
 <tr><td><code>asset.get_label</code></td><td>{{ lineitem.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
 <tr><td><code>asset.type.inspection_criteria</code></td><td>{{ lineitem.asset.type.inspection_criteria|default:&quot;&quot; }}</td></tr>
-<tr><td><code>description</code></td><td>{{ lineitem.description|default:&#x27;-&#x27; }}</td></tr>
+<tr><td><code>description</code></td><td>{{ lineitem.description|markdowner }}</td></tr>
 <tr><td><code>get_taxcode_display</code></td><td>{{ lineitem.get_taxcode_display }}</td></tr>
 <tr><td><code>gst</code></td><td>{{ lineitem.gst|currency }}</td></tr>
-<tr><td><code>product</code></td><td>{{ lineitem.product|markdowner }}</td></tr>
+<tr><td><code>product</code></td><td>{{ lineitem.product|markdowner|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>product.code</code></td><td>{{ lineitem.product.code|markdowner|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>product.description</code></td><td>{{ lineitem.product.description }}</td></tr>
 <tr><td><code>product.name</code></td><td>{{ lineitem.product.name|markdowner|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>product.sku</code></td><td>{{ lineitem.product.sku|markdowner }}</td></tr>
-<tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:&quot;-2&quot; }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ lineitem.quantity|floatformat:2 }}</td></tr>
 <tr><td><code>remark.created</code></td><td>{{ lineitem.remark.created|date }}</td></tr>
-<tr><td><code>remark.get_description</code></td><td>{{ lineitem.remark.get_description|markdowner }}</td></tr>
+<tr><td><code>remark.get_description</code></td><td>{{ lineitem.remark.get_description }}</td></tr>
 <tr><td><code>remark.get_public_url</code></td><td>{{ lineitem.remark.get_public_url|absolute }}</td></tr>
 <tr><td><code>remark.get_resolution</code></td><td>{{ lineitem.remark.get_resolution|markdowner }}</td></tr>
 <tr><td><code>remark.get_severity_display</code></td><td>{{ lineitem.remark.get_severity_display }}</td></tr>
@@ -10093,10 +10093,10 @@
 <tr><td><code>remark.ref</code></td><td>{{ lineitem.remark.ref }}</td></tr>
 <tr><td><code>routineservicetype.name</code></td><td>{{ lineitem.routineservicetype.name }}</td></tr>
 <tr><td><code>routineservicetype.standard.name</code></td><td>{{ lineitem.routineservicetype.standard.name }}</td></tr>
-<tr><td><code>subtotal</code></td><td>{{ lineitem.subtotal|currency }}</td></tr>
+<tr><td><code>subtotal</code></td><td>{{ lineitem.subtotal|currency|affix:&quot;- &quot; }}</td></tr>
 <tr><td><code>task.description</code></td><td>{{ lineitem.task.description }}</td></tr>
 <tr><td><code>task.id</code></td><td>{{ lineitem.task.id }}</td></tr>
-<tr><td><code>tax</code></td><td>{{ lineitem.tax|currency }}</td></tr>
+<tr><td><code>tax</code></td><td>{{ lineitem.tax|currency|affix:&quot;- &quot; }}</td></tr>
 <tr><td><code>total</code></td><td>{{ lineitem.total|currency }}</td></tr>
 <tr><td><code>unit_price</code></td><td>{{ lineitem.unit_price|currency }}</td></tr>
 </table>
@@ -10130,11 +10130,11 @@ ID: {{ lineitem.remark.id }}
                                     When working with a collection (consolidated_tasks), this variable (lineitem_group) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;section class=&quot;mb-0&quot;&gt;
-{% consolidated_invoice_summary invoice as consolidated_tasks %}
+                                    <div class="example-code">&lt;/thead&gt;
+&lt;tbody class=&quot;table-striped table-bordered&quot;&gt;
 {% for lineitem_group in consolidated_tasks %}
 {% if lineitem_group.task %}
-&lt;dl&gt;</div>
+&lt;tr&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -10258,7 +10258,7 @@ ID: {{ lineitem.remark.id }}
 <tr><td><code>cost_summary.subtotal</code></td><td>{{ lineitem_group.cost_summary.subtotal|currency }}</td></tr>
 <tr><td><code>cost_summary.total</code></td><td>{{ lineitem_group.cost_summary.total|currency }}</td></tr>
 <tr><td><code>property.address</code></td><td>{{ lineitem_group.property.address }}</td></tr>
-<tr><td><code>property.authorisation_ref</code></td><td>{{ lineitem_group.property.authorisation_ref|default:&#x27;-&#x27; }}</td></tr>
+<tr><td><code>property.authorisation_ref</code></td><td>{{ lineitem_group.property.authorisation_ref|default:&#x27;-&#x27;}}</td></tr>
 <tr><td><code>property.client_ref</code></td><td>{{ lineitem_group.property.client_ref }}</td></tr>
 <tr><td><code>property.name</code></td><td>{{ lineitem_group.property.name }}</td></tr>
 <tr><td><code>property.ref</code></td><td>{{ lineitem_group.property.ref }}</td></tr>
@@ -10270,7 +10270,7 @@ ID: {{ lineitem.remark.id }}
 <tr><td><code>task.property</code></td><td>{{ lineitem_group.task.property }}</td></tr>
 <tr><td><code>task.ref</code></td><td>{{ lineitem_group.task.ref }}</td></tr>
 <tr><td><code>task.scope_of_works</code></td><td>{{ lineitem_group.task.scope_of_works|markdowner }}</td></tr>
-<tr><td><code>task.status_changed_inspected</code></td><td>{{ lineitem_group.task.status_changed_inspected|date:&quot;jS F Y&quot;|markdowner }}</td></tr>
+<tr><td><code>task.status_changed_inspected</code></td><td>{{ lineitem_group.task.status_changed_inspected }}</td></tr>
 </table>
 </details>
 <details class="expandable-section">
@@ -12271,11 +12271,11 @@ ID: {{ lineitem.remark.id }}
                                     When working with a collection (creditnotes), this variable (note) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;table class=&quot;table table-sm border-grey&quot;&gt;
-&lt;tbody class=&quot;summary&quot;&gt;
+                                    <div class="example-code">&lt;/tr&gt;
+{% if creditnotes %}
 {% for note in creditnotes %}
 &lt;tr&gt;
-&lt;th class=&quot;text-right text-break&quot;</div>
+&lt;th class=&quot;text-right&quot;&gt;Credit {{ note.number }} - {{ note }}&lt;/th&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -12929,11 +12929,11 @@ ID: {{ lineitem.remark.id }}
                                     When working with a collection (after_photos), this variable (photo) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;div&gt;&lt;strong&gt;After&lt;/strong&gt;&lt;/div&gt;
-&lt;div class=&quot;d-flex flex-row flex-wrap&quot;&gt;
+                                    <div class="example-code">&lt;strong&gt;After&lt;/strong&gt;
+&lt;div class=&quot;d-flex flex-row&quot;&gt;
 {% for photo in after_photos %}
-{% get_overlay_for_photo report photo as overlay %}
-&lt;div class=&quot;px-2&quot;&gt;</div>
+{% include &quot;webtemplates/2022-photo-tile&quot; with photo=photo class=&#x27;mr-3&#x27; %}
+{% endfor %}</div>
                                 </div>
                             </span>
                         </div>
@@ -12949,7 +12949,7 @@ ID: {{ lineitem.remark.id }}
                                     <div class="example-code">&lt;div class=&quot;m-3&quot;&gt;
 &lt;div class=&quot;d-flex flex-row&quot;&gt;
 {% for photo in task_photos %}
-{% include &quot;webtemplates/2022-photo-tile&quot; with photo=photo class=&#x27;m-3&#x27; %}
+{% include &quot;webtemplates/2022-photo-tile&quot; with photo=photo class=&quot;mr-1 mt-1&quot; %}
 {% endfor %}</div>
                                 </div>
                             </span>
@@ -12963,11 +12963,11 @@ ID: {{ lineitem.remark.id }}
                                     When working with a collection (photos), this variable (photo) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">{% get_after_photos_for_remark report remark as photos %}
-{% if photos %}
+                                    <div class="example-code">{% if photos %}
+&lt;div class=&quot;photo-row my-1&quot;&gt;
 {% for photo in photos %}
-{% get_overlay_for_photo report photo as overlay %}
-&lt;div class=&quot;d-inline-block&quot;&gt;</div>
+&lt;a href=&quot;{% cdn_image_url photo.path type=&quot;authenticated&quot; %}&quot;&gt;
+{% cdn_image photo.path width=130 height=90 crop=&quot;limit&quot; type=&quot;authenticated&quot; %}</div>
                                 </div>
                             </span>
                         </div>
@@ -12980,8 +12980,8 @@ ID: {{ lineitem.remark.id }}
                                     When working with a collection (asset_photos), this variable (photo) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;td colspan=&quot;3&quot;&gt;
-&lt;div class=&quot;d-flex flex-wrap&quot;&gt;
+                                    <div class="example-code">&lt;/a&gt;
+{% empty %}
 {% for photo in asset_photos %}
 &lt;a class=&quot;mx-1 mb-2&quot; href=&quot;{% cdn_image_url photo.path type=&quot;authenticated&quot; %}&quot;&gt;
 {% cdn_image photo.path width=125 height=175 crop=&quot;fill&quot; type=&quot;authenticated&quot; %}</div>
@@ -15204,7 +15204,7 @@ ID: {{ lineitem.remark.id }}
 <table>
 <tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>grouper</code></td><td>{{ product_group.grouper }}</td></tr>
-<tr><td><code>list</code></td><td>{{ product_group.list|sum_list:&quot;subtotal&quot;|currency }}</td></tr>
+<tr><td><code>list</code></td><td>{{ product_group.list|sum_list:&quot;quantity&quot;|floatformat:0 }}</td></tr>
 <tr><td><code>list.0</code></td><td>{{ product_group.list.0|get_lineitem_tax_code }}</td></tr>
 <tr><td><code>list.0.product.sku</code></td><td>{{ product_group.list.0.product.sku }}</td></tr>
 <tr><td><code>list.0.unit_price</code></td><td>{{ product_group.list.0.unit_price|currency }}</td></tr>
@@ -16488,7 +16488,7 @@ ID: {{ lineitem.remark.id }}
 <tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>answer</code></td><td>{{ prompt.answer|format_answer }}</td></tr>
 <tr><td><code>answer.value.result</code></td><td>{{ prompt.answer.value.result |upper }}</td></tr>
-<tr><td><code>question.label</code></td><td>{{ prompt.question.label }}</td></tr>
+<tr><td><code>question.label</code></td><td>{{ prompt.question.label |markdowner  }}</td></tr>
 <tr><td><code>question.ref</code></td><td>{{ prompt.question.ref|slugify }}</td></tr>
 </table>
 </details>
@@ -16699,12 +16699,12 @@ ID: {{ lineitem.remark.id }}
 <summary>Attributes</summary>
 <table>
 <tr><th>Attribute</th><th>Example Usage</th></tr>
-<tr><td><code>address</code></td><td>{{ property.address }}</td></tr>
+<tr><td><code>address</code></td><td>{{ property.address|markdowner }}</td></tr>
 <tr><td><code>address.display</code></td><td>{{ property.address.display|default:property.address.address }}</td></tr>
 <tr><td><code>billingcard.address</code></td><td>{{ property.billingcard.address|markdowner }}</td></tr>
 <tr><td><code>billingcard.postal_address</code></td><td>{{ property.billingcard.postal_address|markdowner }}</td></tr>
 <tr><td><code>client.address</code></td><td>{{ property.client.address|markdowner }}</td></tr>
-<tr><td><code>client_address</code></td><td>{{ property.client_address|linebreaksbr }}</td></tr>
+<tr><td><code>client_address</code></td><td>{{  property.client_address|linebreaksbr }}</td></tr>
 <tr><td><code>extra_fields.aov_sn_number</code></td><td>{{ property.extra_fields.aov_sn_number|markdowner }}</td></tr>
 <tr><td><code>extra_fields.current_gas_extinguisher_sn_number</code></td><td>{{ property.extra_fields.current_gas_extinguisher_sn_number|markdowner }}</td></tr>
 <tr><td><code>extra_fields.disabled_refuge_sn_number</code></td><td>{{ property.extra_fields.disabled_refuge_sn_number|markdowner }}</td></tr>
@@ -16714,7 +16714,7 @@ ID: {{ lineitem.remark.id }}
 <tr><td><code>extra_fields.invoice_entity</code></td><td>{{ property.extra_fields.invoice_entity|markdowner }}</td></tr>
 <tr><td><code>extra_fields.plans_or_specifications</code></td><td>{{ property.extra_fields.plans_or_specifications }}</td></tr>
 <tr><td><code>extra_fields.smoke_vent_sn_numberr</code></td><td>{{ property.extra_fields.smoke_vent_sn_numberr|markdowner }}</td></tr>
-<tr><td><code>name</code></td><td>{{ property.name|linebreaksbr }}</td></tr>
+<tr><td><code>name</code></td><td>{{ property.name }}</td></tr>
 <tr><td><code>ref</code></td><td>{{ property.ref }}</td></tr>
 </table>
 </details>
@@ -17262,7 +17262,7 @@ ID: {{ lineitem.remark.id }}
 <tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>contractor.name</code></td><td>{{ purchaseorder.contractor.name }}</td></tr>
 <tr><td><code>created</code></td><td>{{ purchaseorder.created|date:&quot;jS F Y&quot;  }}</td></tr>
-<tr><td><code>date</code></td><td>{{ purchaseorder.date|date:&quot;jS F Y&quot;|default:&quot;-&quot; }}</td></tr>
+<tr><td><code>date</code></td><td>{{ purchaseorder.date|date:&quot;jS F Y&quot; }}</td></tr>
 <tr><td><code>delivery_instructions</code></td><td>{{ purchaseorder.delivery_instructions|markdowner }}</td></tr>
 <tr><td><code>description</code></td><td>{{ purchaseorder.description|markdowner }}</td></tr>
 <tr><td><code>due_date</code></td><td>{{ purchaseorder.due_date|date:&quot;jS F Y&quot;|default:&quot;-&quot; }}</td></tr>
@@ -17275,14 +17275,14 @@ ID: {{ lineitem.remark.id }}
 <tr><td><code>gst</code></td><td>{{ purchaseorder.gst|currency }}</td></tr>
 <tr><td><code>number</code></td><td>{{ purchaseorder.number|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>pk</code></td><td>{{ purchaseorder.pk }}</td></tr>
-<tr><td><code>ref</code></td><td>{{ purchaseorder.ref|markdowner }}</td></tr>
+<tr><td><code>ref</code></td><td>{{ purchaseorder.ref }}</td></tr>
 <tr><td><code>submitted_by</code></td><td>{{ purchaseorder.submitted_by|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>subtotal</code></td><td>{{ purchaseorder.subtotal|currency }}</td></tr>
 <tr><td><code>supplier</code></td><td>{{ purchaseorder.supplier }}</td></tr>
 <tr><td><code>supplier.accounting_organisation.name</code></td><td>{{ purchaseorder.supplier.accounting_organisation.name }}</td></tr>
 <tr><td><code>supplier.accounts_address</code></td><td>{{ purchaseorder.supplier.accounts_address|linebreaksbr }}</td></tr>
 <tr><td><code>supplier_address</code></td><td>{{ purchaseorder.supplier_address|linebreaksbr }}</td></tr>
-<tr><td><code>supplier_ref</code></td><td>{{ purchaseorder.supplier_ref }}</td></tr>
+<tr><td><code>supplier_ref</code></td><td>{{ purchaseorder.supplier_ref|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>task.address</code></td><td>{{ purchaseorder.task.address|linebreaksbr }}</td></tr>
 <tr><td><code>task.description</code></td><td>{{ purchaseorder.task.description|markdowner }}</td></tr>
 <tr><td><code>task.property</code></td><td>{{ purchaseorder.task.property }}</td></tr>
@@ -17321,7 +17321,7 @@ ID: {{ lineitem.remark.id }}
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
                                     <div class="example-code">{% if relevant_quotes %}
-&lt;strong&gt;Quote: &lt;/strong&gt;
+&lt;div&gt;
 {% for quote in relevant_quotes %}
 &lt;a href=&quot;{{ quote.get_uuid_approval_url|absolute }}&quot; class=&quot;btn btn-link text-muted&quot;&gt;- See quote {{ quote}} ({{ quote.status }}){% if not forloop.last %}, {% endif %}&lt;/a&gt;
 {% endfor %}</div>
@@ -18282,9 +18282,9 @@ ID: {{ lineitem.remark.id }}
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
                                     <div class="example-code">&lt;tr&gt;
-&lt;td class=&quot;non-conformance text-white&quot;&gt;&lt;strong&gt;
+&lt;td width=&quot;5%&quot; class=&quot;critical text-white&quot;&gt;&lt;strong&gt;
 {% for rem in severity_remarks %}
-{% if rem.grouper == 2 %}
+{% if rem.grouper == 10 %}
 {{rem.list|length}}</div>
                                 </div>
                             </span>
@@ -18344,11 +18344,11 @@ ID: {{ lineitem.remark.id }}
                                     When working with a collection (prompt), this variable (remark) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">{{ prompt.answer.reason }}
-{% elif prompt.answer.remarks.exists %}
+                                    <div class="example-code">&lt;!-- prompt remarks --&gt;
+{% if prompt.answer.remarks.exists %}
 {% for remark in prompt.answer.remarks.all %}
-&lt;span class=&quot;d-block&quot;&gt;
-&lt;strong&gt;{{ remark.get_severity_display }}&lt;/strong&gt;</div>
+&lt;div&gt;
+&lt;strong class=&quot;severity-{{ remark.get_severity }}&quot;&gt;&lt;/strong&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -18396,8 +18396,8 @@ ID: {{ lineitem.remark.id }}
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
                                     <div class="example-code">&lt;div&gt;
-&lt;span class=&quot;text-muted label&quot;&gt;Non-conformances:&lt;/span&gt;
-{% for remark in system.noncomformances %}
+&lt;span class=&quot;text-muted label&quot;&gt;System defects:&lt;/span&gt;
+{% for remark in system.defects %}
 &lt;div&gt;&lt;a target=&quot;_blank&quot; href=&quot;{{ remark.get_public_url|absolute }}&quot;&gt;{{ remark.ref }}&lt;/a&gt; {{ remark.get_description|truncatechars:50 }}&lt;/div&gt;
 {% empty %}</div>
                                 </div>
@@ -18620,15 +18620,15 @@ ID: {{ lineitem.remark.id }}
 <tr><th>Attribute</th><th>Example Usage</th></tr>
 <tr><td><code>created</code></td><td>{{ remark.created|dayssince:report.created }}</td></tr>
 <tr><td><code>extra_fields.question</code></td><td>{{ remark.extra_fields.question }}</td></tr>
-<tr><td><code>get_description</code></td><td>{{ remark.get_description|truncatechars:50 }}</td></tr>
+<tr><td><code>get_description</code></td><td>{{ remark.get_description|markdowner }}</td></tr>
 <tr><td><code>get_public_url</code></td><td>{{ remark.get_public_url|absolute }}</td></tr>
 <tr><td><code>get_resolution</code></td><td>{{ remark.get_resolution }}</td></tr>
 <tr><td><code>get_severity</code></td><td>{{ remark.get_severity }}</td></tr>
-<tr><td><code>get_severity_display</code></td><td>{{ remark.get_severity_display|upper }}</td></tr>
+<tr><td><code>get_severity_display</code></td><td>{{ remark.get_severity_display }}</td></tr>
 <tr><td><code>id</code></td><td>{{ remark.id }}</td></tr>
 <tr><td><code>identified</code></td><td>{{ remark.identified }}</td></tr>
 <tr><td><code>last_verified_date</code></td><td>{{ remark.last_verified_date }}</td></tr>
-<tr><td><code>location</code></td><td>{{ remark.location|default:&quot;No location&quot; }}</td></tr>
+<tr><td><code>location</code></td><td>{{ remark.location|markdowner }}</td></tr>
 <tr><td><code>ref</code></td><td>{{ remark.ref }}</td></tr>
 <tr><td><code>severity</code></td><td>{{ remark.severity }}</td></tr>
 <tr><td><code>type.standard</code></td><td>{{ remark.type.standard }}</td></tr>
@@ -19284,9 +19284,9 @@ ID: {{ lineitem.remark.id }}
 <summary>Attributes</summary>
 <table>
 <tr><th>Attribute</th><th>Example Usage</th></tr>
-<tr><td><code>asset.compliant</code></td><td>{{ repair.asset.compliant|yesno:&quot;PASS,FAIL,N/A&quot; }}</td></tr>
+<tr><td><code>asset.compliant</code></td><td>{{ repair.asset.compliant }}</td></tr>
 <tr><td><code>asset.extra_fields.notes_on_install</code></td><td>{{ repair.asset.extra_fields.notes_on_install|default:&quot;No notes available&quot; }}</td></tr>
-<tr><td><code>asset.get_label</code></td><td>{{ repair.asset.get_label|default:&quot;General Repairs&quot; }}</td></tr>
+<tr><td><code>asset.get_label</code></td><td>{{ repair.asset.get_label|default:&quot;Description&quot; }}</td></tr>
 <tr><td><code>notes</code></td><td>{{ repair.notes|default:repair.product.description|default:repair.product.name }}</td></tr>
 <tr><td><code>product.description</code></td><td>{{ repair.product.description|default:repair.product.name }}</td></tr>
 <tr><td><code>quantity</code></td><td>{{ repair.quantity|floatformat:2 }}</td></tr>
@@ -19581,15 +19581,15 @@ ID: {{ repair.remark.id }}
 <tr><td><code>expiry_date</code></td><td>{{ report.expiry_date|date:&quot;jS F Y&quot;|default:&quot;-&quot;}}</td></tr>
 <tr><td><code>general_note</code></td><td>{{ report.general_note|markdowner }}</td></tr>
 <tr><td><code>id</code></td><td>{{ report.id }}</td></tr>
-<tr><td><code>inspected</code></td><td>{{ report.inspected|default:&quot;N/A&quot; }}</td></tr>
-<tr><td><code>issued</code></td><td>{{ report.issued|date:&quot;jS F Y&quot; }}</td></tr>
+<tr><td><code>inspected</code></td><td>{{ report.inspected|arrow_replace:&quot;1 years&quot;|date:&quot;jS F Y&quot; }}</td></tr>
+<tr><td><code>issued</code></td><td>{{ report.issued|date:&quot;dS F Y&quot; }}</td></tr>
 <tr><td><code>property.building_class</code></td><td>{{ report.property.building_class|default:&quot;(unspecified class)&quot; }}</td></tr>
 <tr><td><code>property.building_part</code></td><td>{{ report.property.building_part|default:&quot;This report is for the whole building&quot; }}</td></tr>
 <tr><td><code>property.client.primary_contact</code></td><td>{{ report.property.client.primary_contact }}</td></tr>
 <tr><td><code>task.assigned_to</code></td><td>{{ report.task.assigned_to }}</td></tr>
 <tr><td><code>task.scope_of_works</code></td><td>{{ report.task.scope_of_works|markdowner }}</td></tr>
 <tr><td><code>task.technician_note</code></td><td>{{ report.task.technician_note|markdowner }}</td></tr>
-<tr><td><code>technician</code></td><td>{{ report.technician }}</td></tr>
+<tr><td><code>technician</code></td><td>{{ report.technician|default:&quot;No report technician set&quot; }}</td></tr>
 <tr><td><code>technician.prefs.signature</code></td><td>{{ report.technician.prefs.signature|safe }}</td></tr>
 <tr><td><code>type.extra_fields.conclusion_review</code></td><td>{{ report.type.extra_fields.conclusion_review |markdowner }}</td></tr>
 <tr><td><code>type.extra_fields.confidentiality_statement</code></td><td>{{ report.type.extra_fields.confidentiality_statement|markdowner }}</td></tr>
@@ -19597,13 +19597,13 @@ ID: {{ repair.remark.id }}
 <tr><td><code>type.extra_fields.disclaimer</code></td><td>{{ report.type.extra_fields.disclaimer|markdowner }}</td></tr>
 <tr><td><code>type.extra_fields.duties_of_responsible_person</code></td><td>{{ report.type.extra_fields.duties_of_responsible_person|markdowner }}</td></tr>
 <tr><td><code>type.extra_fields.duties_of_the_responsible_person</code></td><td>{{ report.type.extra_fields.duties_of_the_responsible_person|markdowner }}</td></tr>
-<tr><td><code>type.extra_fields.executive_summary_introduction</code></td><td>{{ report.type.extra_fields.executive_summary_introduction	|markdowner }}</td></tr>
-<tr><td><code>type.extra_fields.executive_summary_purpose</code></td><td>{{ report.type.extra_fields.executive_summary_purpose|markdowner }}</td></tr>
-<tr><td><code>type.extra_fields.executive_summary_scope</code></td><td>{{ report.type.extra_fields.executive_summary_scope|markdowner }}</td></tr>
+<tr><td><code>type.extra_fields.executive_summary_introduction</code></td><td>{{ report.type.extra_fields.executive_summary_introduction |markdowner }}</td></tr>
+<tr><td><code>type.extra_fields.executive_summary_purpose</code></td><td>{{ report.type.extra_fields.executive_summary_purpose |markdowner }}</td></tr>
+<tr><td><code>type.extra_fields.executive_summary_scope</code></td><td>{{ report.type.extra_fields.executive_summary_scope |markdowner }}</td></tr>
 <tr><td><code>type.extra_fields.introduction</code></td><td>{{ report.type.extra_fields.introduction |markdowner }}</td></tr>
-<tr><td><code>type.extra_fields.purpose</code></td><td>{{ report.type.extra_fields.purpose|markdowner }}</td></tr>
+<tr><td><code>type.extra_fields.purpose</code></td><td>{{ report.type.extra_fields.purpose |markdowner }}</td></tr>
 <tr><td><code>type.extra_fields.relevant_standards</code></td><td>{{ report.type.extra_fields.relevant_standards|markdowner }}</td></tr>
-<tr><td><code>type.extra_fields.scope</code></td><td>{{ report.type.extra_fields.scope|markdowner }}</td></tr>
+<tr><td><code>type.extra_fields.scope</code></td><td>{{ report.type.extra_fields.scope |markdowner }}</td></tr>
 <tr><td><code>type.get_extra_fields_display.fire_door_survey</code></td><td>{{ report.type.get_extra_fields_display.fire_door_survey|markdowner }}</td></tr>
 </table>
 </details>
@@ -19667,11 +19667,11 @@ which was performed on {{ report.inspected|default:&quot;N/A&quot; }} via Task {
                                     When working with a collection (maintenance_summary), this variable (row) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">{% endif %}
-&lt;div&gt;
-{% comment %}{% for row in maintenance_summary %}
-{% if row.service == &quot;AOV: Annual&quot; %}{% endcomment %}
-&lt;body&gt;</div>
+                                    <div class="example-code">&lt;thead class=&#x27;no-page-break-after&#x27;&gt;
+&lt;tbody&gt;
+{% for row in maintenance_summary %}
+&lt;tr&gt;
+&lt;td&gt;{{ row.service }}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -23236,14 +23236,14 @@ the &lt;span&gt;{{ schedule.get_type_display }} issued on the {{ schedule.date|d
 <tr><td><code>annual_gst</code></td><td>{{ servicequote.annual_gst|currency }}</td></tr>
 <tr><td><code>annual_subtotal</code></td><td>{{ servicequote.annual_subtotal|currency }}</td></tr>
 <tr><td><code>annual_tax</code></td><td>{{ servicequote.annual_tax|currency }}</td></tr>
-<tr><td><code>annual_total</code></td><td>{{ servicequote.annual_total|divide:12|currency }}</td></tr>
+<tr><td><code>annual_total</code></td><td>{{ servicequote.annual_total }}</td></tr>
 <tr><td><code>author</code></td><td>{{ servicequote.author }}</td></tr>
 <tr><td><code>client_object.email</code></td><td>{{ servicequote.client_object.email|default:servicequote.client_primary_email }}</td></tr>
 <tr><td><code>client_object.name</code></td><td>{{ servicequote.client_object.name|default:servicequote.client_name }}</td></tr>
-<tr><td><code>created</code></td><td>{{ servicequote.created|date:&quot;jS F Y&quot; }}</td></tr>
+<tr><td><code>created</code></td><td>{{ servicequote.created|date }}</td></tr>
 <tr><td><code>cupdated</code></td><td>{{ servicequote.cupdated|date:&quot;jS F Y&quot; }}</td></tr>
 <tr><td><code>date</code></td><td>{{ servicequote.date|date:&quot;jS F Y&quot; }}</td></tr>
-<tr><td><code>expiry_date</code></td><td>{{ servicequote.expiry_date|default:&quot;-&quot; }}</td></tr>
+<tr><td><code>expiry_date</code></td><td>{{ servicequote.expiry_date|date:&quot;jS F Y&quot; }}</td></tr>
 <tr><td><code>extra_fields.contact_email</code></td><td>{{ servicequote.extra_fields.contact_email|default:client.primary_contact.email }}</td></tr>
 <tr><td><code>extra_fields.contact_name</code></td><td>{{ servicequote.extra_fields.contact_name|default:client.primary_contact.name }}</td></tr>
 <tr><td><code>extra_fields.contact_tel_no</code></td><td>{{ servicequote.extra_fields.contact_tel_no|default:client.primary_contact.mobile }}</td></tr>
@@ -23279,7 +23279,7 @@ the &lt;span&gt;{{ schedule.get_type_display }} issued on the {{ schedule.date|d
 <tr><td><code>get_extra_fields_display.system_type_4</code></td><td>{{ servicequote.get_extra_fields_display.system_type_4|default:&quot;&quot; }}</td></tr>
 <tr><td><code>get_extra_fields_display.zone_plans_issue</code></td><td>{{ servicequote.get_extra_fields_display.zone_plans_issue|default:&quot;&quot; }}</td></tr>
 <tr><td><code>product_gst</code></td><td>{{ servicequote.product_gst|add:servicequote.annual_gst|currency }}</td></tr>
-<tr><td><code>product_subtotal</code></td><td>{{ servicequote.product_subtotal|currency }}</td></tr>
+<tr><td><code>product_subtotal</code></td><td>{{ servicequote.product_subtotal|add:servicequote.annual_subtotal|currency }}</td></tr>
 <tr><td><code>product_tax</code></td><td>{{ servicequote.product_tax|currency }}</td></tr>
 <tr><td><code>product_total</code></td><td>{{ servicequote.product_total|currency }}</td></tr>
 <tr><td><code>property_object.address</code></td><td>{{ servicequote.property_object.address|default:servicequote.property_address }}</td></tr>
@@ -23363,7 +23363,7 @@ the &lt;span&gt;{{ schedule.get_type_display }} issued on the {{ schedule.date|d
 &lt;/thead&gt;
 {% for servicetask in report.get_servicetasks_without_service %}
 &lt;tr&gt;
-&lt;td&gt;{{ servicetask.product.code }} &lt;div class=&quot;text-muted&quot;&gt;{{ servicetask.service_item.label }}&lt;/div&gt;&lt;/td&gt;</div>
+&lt;td&gt;{{ servicetask.product.name }} &lt;div class=&quot;text-muted&quot;&gt;{% if servicetask.service_item.label %}{{ servicetask.service_item.label }}{% endif%} {% if servicetask.service_item.location %}&lt;br&gt;&lt;small&gt;({{ servicetask.service_item.location }})&lt;/small&gt;{% endif %}&lt;/div&gt;&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -23560,7 +23560,7 @@ the &lt;span&gt;{{ schedule.get_type_display }} issued on the {{ schedule.date|d
 <tr><td><code>product.description</code></td><td>{{ servicetask.product.description }}</td></tr>
 <tr><td><code>product.name</code></td><td>{{ servicetask.product.name }}</td></tr>
 <tr><td><code>product.sku</code></td><td>{{ servicetask.product.sku }}</td></tr>
-<tr><td><code>quantity</code></td><td>{{ servicetask.quantity|floatformat:-2 }}</td></tr>
+<tr><td><code>quantity</code></td><td>{{ servicetask.quantity|floatformat:0 }}</td></tr>
 <tr><td><code>result</code></td><td>{{ servicetask.result }}</td></tr>
 <tr><td><code>service_item.base_date</code></td><td>{{ servicetask.service_item.base_date|date:&quot;M Y&quot; }}</td></tr>
 <tr><td><code>service_item.label</code></td><td>{{ servicetask.service_item.label }}</td></tr>
@@ -24103,8 +24103,8 @@ the &lt;span&gt;{{ schedule.get_type_display }} issued on the {{ schedule.date|d
                                     When working with a collection (signatures), this variable (signature) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;div class=&quot;tech-sig&quot;&gt;{% render_signature_on_file report.technician %}&lt;/div&gt;
-&lt;/div&gt;  
+                                    <div class="example-code">&lt;div class=&quot;uptick-title&quot;&gt;Customer Signature&lt;/div&gt;
+&lt;div class=&quot;d-flex flex-row m-1&quot;&gt;
 {% for signature in signatures %}
 &lt;div class=&quot;d-flex flex-column uptick-signature justify-content-center align-items-center&quot;&gt;
 &lt;div class=&quot;d-block&quot;&gt;{% cdn_image signature.path height=100 crop=&quot;fill&quot; type=&quot;authenticated&quot; %}&lt;/div&gt;</div>
@@ -25227,7 +25227,7 @@ I confirm that the works have been carried out and i have been made aware of the
 <tr><td><code>item.ref</code></td><td>{{ st.item.ref|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>performed_date</code></td><td>{{ st.performed_date|date:&quot;d/m/Y&quot; }}</td></tr>
 <tr><td><code>product</code></td><td>{{ st.product }}</td></tr>
-<tr><td><code>product.name</code></td><td>{{ st.product.name|default:&quot;&quot; }}</td></tr>
+<tr><td><code>product.name</code></td><td>{{ st.product.name|default:&quot;-&quot; }}</td></tr>
 <tr><td><code>routineserviceleveltype.name</code></td><td>{{ st.routineserviceleveltype.name }}</td></tr>
 <tr><td><code>technician</code></td><td>{{ st.technician }}</td></tr>
 </table>
@@ -26727,7 +26727,7 @@ I confirm that the works have been carried out and i have been made aware of the
 <tr><td><code>property.extra_fields.disabled_employees</code></td><td>{{ task.property.extra_fields.disabled_employees|markdowner }}</td></tr>
 <tr><td><code>property.extra_fields.employees</code></td><td>{{ task.property.extra_fields.employees|markdowner }}</td></tr>
 <tr><td><code>property.extra_fields.enforced_by</code></td><td>{{ task.property.extra_fields.enforced_by|markdowner }}</td></tr>
-<tr><td><code>property.extra_fields.executive_summary_fire_life_safety_measures</code></td><td>{{ task.property.extra_fields.executive_summary_fire_life_safety_measures |markdowner }}</td></tr>
+<tr><td><code>property.extra_fields.executive_summary_fire_life_safety_measures</code></td><td>{{ task.property.extra_fields.executive_summary_fire_life_safety_measures|markdowner }}</td></tr>
 <tr><td><code>property.extra_fields.executive_summary_occupancy</code></td><td>{{ task.property.extra_fields.executive_summary_occupancy|markdowner }}</td></tr>
 <tr><td><code>property.extra_fields.executive_summary_the_premises</code></td><td>{{ task.property.extra_fields.executive_summary_the_premises|markdowner }}</td></tr>
 <tr><td><code>property.extra_fields.fire_life_safety_measures</code></td><td>{{ task.property.extra_fields.fire_life_safety_measures |markdowner }}</td></tr>
@@ -27905,11 +27905,11 @@ I confirm that the works have been carried out and i have been made aware of the
                                     When working with a collection (labour_sessions), this variable (tasksession) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/thead&gt;
-&lt;tbody&gt;
+                                    <div class="example-code">{% comment %} &lt;td width=&quot;15%&quot; class=&quot;text-center&quot;&gt;{{ technician.inspected_date }}&lt;/td&gt; {% endcomment %}
+{% comment %}    {% get_labour_sessions_for_task report as labour_sessions %}
 {% for tasksession in labour_sessions %}
-&lt;tr&gt;
-&lt;td&gt;{{ tasksession.get_type_display }}&lt;/td&gt;</div>
+{% if tasksession.get_type_display == &quot;Performing Task&quot; %}
+&lt;td width=&quot;35%&quot; class=&quot;text-center&quot;&gt;{{ tasksession.get_duration|duration }}&lt;/td&gt;</div>
                                 </div>
                             </span>
                         </div>
@@ -28401,7 +28401,7 @@ I confirm that the works have been carried out and i have been made aware of the
 <tr><td><code>finished</code></td><td>{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;H:i&#x27;|default:&quot;(still in progress)&quot; }}</td></tr>
 <tr><td><code>get_duration</code></td><td>{{ tasksession.get_duration|duration }}</td></tr>
 <tr><td><code>get_type_display</code></td><td>{{ tasksession.get_type_display }}</td></tr>
-<tr><td><code>started</code></td><td>{{ tasksession.started|timezone:tasksession.timezone|date:&#x27;d/m/Y H:i&#x27; }}</td></tr>
+<tr><td><code>started</code></td><td>{{ tasksession.started|timezone:tasksession.timezone|date:&#x27;d/m/Y H:iA&#x27; }}</td></tr>
 <tr><td><code>technician</code></td><td>{{ tasksession.technician }}</td></tr>
 </table>
 </details>
@@ -28434,11 +28434,11 @@ I confirm that the works have been carried out and i have been made aware of the
                                     When working with a collection (maintenance_technicians), this variable (technician) 
                                     represents each individual item as we process the list.<br><br>
                                     <strong>Example:</strong>
-                                    <div class="example-code">&lt;/thead&gt;
-&lt;tbody&gt;
+                                    <div class="example-code">&lt;td&gt;{{ tasksession.finished|timezone:tasksession.timezone|date:&#x27;&#x27;|default:&quot;(still in progress)&quot; }}&lt;/td&gt;
+&lt;td&gt;
 {% for technician in maintenance_technicians %}
-&lt;tr&gt;
-&lt;td&gt;{{ technician.name }}&lt;/td&gt;</div>
+{% if technician.name == tasksession.technician.name %}
+{% for accreditation in technician.accreditations %}</div>
                                 </div>
                             </span>
                         </div>
@@ -28928,7 +28928,7 @@ I confirm that the works have been carried out and i have been made aware of the
 <summary>Attributes</summary>
 <table>
 <tr><th>Attribute</th><th>Example Usage</th></tr>
-<tr><td><code>inspected_date</code></td><td>{{ technician.inspected_date }}</td></tr>
+<tr><td><code>inspected_date</code></td><td>{{ technician.inspected_date|date:&quot;d/m/Y&quot; }}</td></tr>
 <tr><td><code>name</code></td><td>{{ technician.name }}</td></tr>
 </table>
 </details>
